@@ -1,10 +1,10 @@
 /**
  * conjoon
- * (c) 2007-2016 conjoon.org
+ * (c) 2007-2017 conjoon.org
  * licensing@conjoon.org
  *
  * app-cn_user
- * Copyright (C) 2016 Thorsten Suckow-Homberg/conjoon.org
+ * Copyright (C) 2017 Thorsten Suckow-Homberg/conjoon.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -50,8 +50,10 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
 
     requires : [
         'conjoon.cn_user.Manager',
+        'conjoon.cn_user.model.UserModel',
         'conjoon.cn_user.view.authentication.AuthWindow'
     ],
+
 
     /**
      * Stores a reference to an active {@link conjoon.cn_user.view.authentication.AuthWindow}, if any.
@@ -95,8 +97,22 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
      * @param {conjoon.cn_user.model.UserModel} userModel
      *
      * @protected
+     *
+     * @throws if user Model is not an instance of {@link onjoon.cn_user.model.UserModel}
      */
-    userAvailable : Ext.emptyFn,
+    userAvailable : function(userModel) {
+        var me = this;
+
+        if (!(userModel instanceof conjoon.cn_user.model.UserModel)) {
+            Ext.raise({
+                source : Ext.getClassName(me),
+                msg    : "Method needs userModel to be instance of conjoon.cn_user.model.UserModel"
+            });
+        }
+
+        me.authWindow.close();
+        me.getApplication().launch();
+    },
 
     /**
      * Method to call when a user could not be loaded.
@@ -141,8 +157,6 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
         onUserLoadSuccess : function(userModel) {
             var me = this;
 
-            this.authWindow.close();
-            this.getApplication().launch();
             me.userAvailable(userModel);
         },
 

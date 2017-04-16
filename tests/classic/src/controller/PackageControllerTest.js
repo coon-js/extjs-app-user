@@ -1,10 +1,10 @@
 /**
  * conjoon
- * (c) 2007-2016 conjoon.org
+ * (c) 2007-2017 conjoon.org
  * licensing@conjoon.org
  *
  * app-cn_user
- * Copyright (C) 2016 Thorsten Suckow-Homberg/conjoon.org
+ * Copyright (C) 2017 Thorsten Suckow-Homberg/conjoon.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -125,6 +125,7 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
 
             t.expect(wasLaunched).toBeUndefined();
             t.expect(ctrl.authWindow).toBe(aw);
+            aw.destroy();
         });
 
         t.it('Test userWasNotAuthorized to be empty function', function(t) {
@@ -134,11 +135,38 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
             t.expect(ctrl.userWasNotAuthorized).toBe(Ext.emptyFn);
         });
 
-        t.it('Test userAvailable to be empty function', function(t) {
 
-            var ctrl = Ext.create('conjoon.cn_user.controller.PackageController');
+        t.it('Test userAvailable()', function(t) {
 
-            t.expect(ctrl.userAvailable).toBe(Ext.emptyFn);
+            var ctrl = Ext.create('conjoon.cn_user.controller.PackageController', {
+                    application : {
+                        launch : function() {
+                            wasLaunched = true;
+                        }
+                    }
+                }),
+                aw          = undefined,
+                wasLaunched = undefined;
+
+            t.expect(wasLaunched).toBeUndefined();
+
+            var exc = e = undefined;
+            try {
+                ctrl.userAvailable('foo');
+            } catch (e) {
+                exc = e;
+            }
+            t.expect(exc).toBeDefined();
+            t.expect(exc.msg).toContain("needs userModel to be instance of");
+
+            ctrl.preLaunchHook();
+            aw = testAuthWindowVisible(t);
+
+            ctrl.userAvailable(Ext.create('conjoon.cn_user.model.UserModel'));
+
+            testAuthWindowGone(t);
+            t.expect(wasLaunched).toBe(true);
+            t.expect(ctrl.authWindow).toBeNull();
         });
 
     });
