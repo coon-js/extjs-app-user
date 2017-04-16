@@ -51,7 +51,8 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
     requires : [
         'conjoon.cn_user.Manager',
         'conjoon.cn_user.model.UserModel',
-        'conjoon.cn_user.view.authentication.AuthWindow'
+        'conjoon.cn_user.view.authentication.AuthWindow',
+        'conjoon.cn_user.view.toolbar.UserImageItem'
     ],
 
 
@@ -83,10 +84,34 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
     },
 
     /**
-     * @inheritdoc
+     * Returns permaNav items, including the name of the currently signed in user
+     *
+     * @return {Object}
+     *
+     * @throws if the UserManager is currently not managing a user.
+     *
+     * @see conjoon.cn_user.Manager#getUser
      */
     postLaunchHook : function() {
-        return {};
+
+        var me   = this,
+            user = conjoon.cn_user.Manager.getUser();
+
+        if (!user) {
+            Ext.raise({
+                source : Ext.getClassName(this),
+                msg    : Ext.getClassName(this) + "#postLaunchHool requires a valid user"
+            })
+        }
+
+        return {
+            permaNav : [{
+                xtype : 'tbtext',
+                text  : user.get('username')
+            }, {
+                xtype  : 'cn_user-toolbaruserimageitem'
+            }]
+        };
     },
 
     /**

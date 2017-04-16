@@ -66,11 +66,35 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
 
         });
 
-        t.it('Test postLaunchHook return empty object', function(t) {
+        /**
+         * conjoon/app-cn_user/#1
+         */
+        t.it('Test postLaunchHook to not return an empty object', function(t) {
 
-            var ctrl = Ext.create('conjoon.cn_user.controller.PackageController');
+            var ctrl = Ext.create('conjoon.cn_user.controller.PackageController'),
+                obj, exc = e = undefined;
 
-            t.expect(ctrl.postLaunchHook()).toEqual({});
+            t.expect(conjoon.cn_user.Manager.getUser()).toBeNull();
+            try{ctrl.postLaunchHook();}catch(e){exc = e;}
+
+            t.expect(exc).toBeDefined();
+            t.expect(exc.msg).toContain('requires a valid user');
+
+
+            conjoon.cn_user.Manager.loadUser();
+            t.expect(conjoon.cn_user.Manager.getUser()).not.toBeNull();
+
+            obj = ctrl.postLaunchHook();
+
+
+            t.expect(obj).not.toEqual({});
+
+            t.expect(obj.permaNav).toBeDefined();
+            t.expect(obj.permaNav.length).toBe(2);
+            t.expect(obj.permaNav[0].text).toBe(
+                conjoon.cn_user.Manager.getUser().get('username'));
+            t.expect(obj.permaNav[1].xtype).toBe(
+                'cn_user-toolbaruserimageitem');
 
         });
 

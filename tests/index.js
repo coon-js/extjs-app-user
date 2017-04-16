@@ -44,6 +44,11 @@ harness.start({
                 'classic/src/view/authentication/AuthFormTest.js',
                 'classic/src/view/authentication/AuthWindowTest.js'
             ]
+        }, {
+            group : 'toolbar',
+            items : [
+                'classic/src/view/toolbar/UserImageItemTest.js'
+            ]
         }]
     }]
 }, {
