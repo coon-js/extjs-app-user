@@ -1,10 +1,10 @@
 /**
  * conjoon
- * (c) 2007-2016 conjoon.org
+ * (c) 2007-2017 conjoon.org
  * licensing@conjoon.org
  *
  * app-cn_user
- * Copyright (C) 2016 Thorsten Suckow-Homberg/conjoon.org
+ * Copyright (C) 2017 Thorsten Suckow-Homberg/conjoon.org
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -40,9 +40,9 @@ Ext.define('conjoon.cn_user.view.authentication.AuthWindow', {
         'conjoon.cn_user.view.authentication.AuthForm'
     ],
 
-    bodyCls: 'cn_user-authwindow',
-
     defaultFocus : 'cn_user-authform', // force focus on authform
+
+    bodyCls: 'cn_user-authwindow',
 
     /**
      * @type {String}
@@ -56,28 +56,31 @@ Ext.define('conjoon.cn_user.view.authentication.AuthWindow', {
         pack  : 'center'
     },
 
-    /**
-     * @inheritdoc
-     */
-    initComponent : function() {
+    items : [{
+        xtype : 'cn_user-authform'
+    }],
 
-        var me = this, form;
+    listeners : {
+        afterrender : 'onWindowAfterRender'
+    },
 
-        form = Ext.widget({
-            xtype : 'cn_user-authform'
-        });
+    privates : {
 
-        me.items = [form];
+        /**
+         * @private
+         */
+        onWindowAfterRender : function() {
+            var me = this;
 
-        // Relay events from the AuthForm
-        me.relayEvents(form, [
+            // Relay events from the AuthForm
+            me.relayEvents(me.down('cn_user-authform'), [
             /**
              * @event cn_user-authrequest
              * @inheritdoc conjoon.cn_user.view.authentication.AuthForm#cn_user-authrequest
              */
-            'cn_user-authrequest'
-        ]);
-
-        me.callParent(arguments);
+                'cn_user-authrequest'
+            ]);
+        }
     }
+
 });
