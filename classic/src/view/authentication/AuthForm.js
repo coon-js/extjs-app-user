@@ -98,7 +98,6 @@ Ext.define('conjoon.cn_user.view.authentication.AuthForm', {
          */
         text  : 'Sign in'
     }, {
-        margin      : '24 0 0 0',
         xtype       : 'textfield',
         name        : 'userid',
         allowBlank  : false,
