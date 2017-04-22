@@ -57,6 +57,9 @@ Ext.define('conjoon.cn_user.view.authentication.AuthWindow', {
     },
 
     items : [{
+        xtype : 'box',
+        cls   : 'badge fa fa-envelope'
+    }, {
         xtype : 'cn_user-authform'
     }],
 

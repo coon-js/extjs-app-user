@@ -92,11 +92,13 @@ Ext.define('conjoon.cn_user.view.authentication.AuthForm', {
 
     items: [{
         xtype : 'label',
+        cls   : 'head-label',
         /**
          * @i18n_text
          */
         text  : 'Sign in'
     }, {
+        margin      : '24 0 0 0',
         xtype       : 'textfield',
         name        : 'userid',
         allowBlank  : false,
@@ -105,6 +107,7 @@ Ext.define('conjoon.cn_user.view.authentication.AuthForm', {
          */
         emptyText   : 'user id'
     }, {
+        margin      : '24 0 0 0',
         xtype       : 'textfield',
         /**
          * @i18n_text
@@ -114,6 +117,7 @@ Ext.define('conjoon.cn_user.view.authentication.AuthForm', {
         name        : 'password',
         allowBlank  : false
     }, {
+        margin      : '24 0 0 0',
         xtype      : 'button',
         reference  : 'loginButton',
         /**
