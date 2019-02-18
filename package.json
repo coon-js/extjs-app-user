@@ -46,7 +46,7 @@
      * Required only if you are distributing this package through a Sencha Cmd repository,
      * in which case it should match the name you assign to your local package repository.
      */
-    "creator": "coon Open Source Project",
+    "creator": "coon.js",
 
     /**
      * A summarized description of this package.
