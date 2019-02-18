@@ -51,12 +51,12 @@
     /**
      * A summarized description of this package.
      */
-    "summary": "Basic functionality for managing authentication of a single user for a Sencha application.",
+    "summary": "Application package for lib-cn_comp supported Sencha ExtJS applications providing user authentication views and flow.",
 
     /**
      * A detailed description of this package.
      */
-    "detailedDescription": "This package contains basic functionality for authenticating a user against an application built with Sencha and the coon libraries. Requires lib-cn_comp.",
+    "detailedDescription": "Application package for lib-cn_comp supported Sencha ExtJS applications providing user authentication views and flow. Requires lib-cn_comp.",
 
     /**
      * The package version.
