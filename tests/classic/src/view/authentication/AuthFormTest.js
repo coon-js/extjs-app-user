@@ -110,15 +110,14 @@ describe('coon.user.view.authentication.AuthFormTest', function(t) {
         });
 
         t.waitForMs(500, function(){
-            t.click(form.down('button[reference=loginButton]'));
-
-            t.waitForMs(500, function(){
+            t.click(form.down('button[reference=loginButton]'), function() {
                 t.expect(signaledForm).toBe(form);
                 t.expect(signal).toEqual({
                     userid   : 'useridValue',
                     password : 'passwordValue'
                 });
             });
+
         });
 
     });
@@ -136,10 +135,12 @@ describe('coon.user.view.authentication.AuthFormTest', function(t) {
         });
 
         t.waitForMs(600, function(){
-            t.keyPress(form.down('textfield[name=password]'), 'RETURN');
-            t.expect(signal).toEqual({
-                userid   : 'useridValue1',
-                password : 'passwordValue1'
+            t.keyPress(form.down('textfield[name=password]'), '[RETURN]', undefined, function() {
+                t.expect(signal).toEqual({
+                    userid   : 'useridValue1',
+                    password : 'passwordValue1'
+                });
+
             });
 
         });
@@ -178,8 +179,10 @@ describe('coon.user.view.authentication.AuthFormTest', function(t) {
 
         t.waitForMs(500, function(){
             t.expect(label.isVisible()).toBe(true);
-            t.keyPress(form.down('textfield[name=password]'), 'RETURN');
-            t.expect(label.isVisible()).toBe(false);
+            t.keyPress(form.down('textfield[name=password]'), '[RETURN]', undefined, function() {
+                t.expect(label.isVisible()).toBe(false);
+            });
+
 
         });
 
