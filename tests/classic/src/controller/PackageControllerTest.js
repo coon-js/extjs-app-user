@@ -1,26 +1,29 @@
 /**
- * conjoon
- * (c) 2007-2017 conjoon.org
- * licensing@conjoon.org
- *
+ * coon.js
  * app-cn_user
- * Copyright (C) 2017 Thorsten Suckow-Homberg/conjoon.org
+ * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/app-cn_user
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
+describe('coon.user.controller.PackageControllerTest', function(t) {
 
     var testAuthWindowGone = function(t) {
         var authWindow = Ext.ComponentQuery.query('cn_user-authwindow');
@@ -34,21 +37,21 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
         t.expect(authWindow).not.toBeNull();
         t.expect(authWindow).toBeDefined();
         t.expect(authWindow.length).toBe(1);
-        t.expect(authWindow[0] instanceof conjoon.cn_user.view.authentication.AuthWindow).toBeTruthy();
+        t.expect(authWindow[0] instanceof coon.user.view.authentication.AuthWindow).toBeTruthy();
         t.expect(authWindow[0].isVisible()).toBeTruthy();
         return authWindow[0];
     }
 
-    t.requireOk('conjoon.cn_user.Manager', function() {
+    t.requireOk('coon.user.Manager', function() {
         t.beforeEach(function() {
-            conjoon.cn_user.Manager.setUserProvider(Ext.create('conjoon.cn_user.DefaultUserProvider'));
+            coon.user.Manager.setUserProvider(Ext.create('coon.user.DefaultUserProvider'));
         });
 
         t.it('Test preLaunchHook return false', function(t) {
-            var ctrl = Ext.create('conjoon.cn_user.controller.PackageController'),
+            var ctrl = Ext.create('coon.user.controller.PackageController'),
                 authWindow;
 
-            t.expect(conjoon.cn_user.Manager.getUser()).toBeNull();
+            t.expect(coon.user.Manager.getUser()).toBeNull();
             t.expect(ctrl.preLaunchHook()).toBe(false);
 
             testAuthWindowVisible(t).close();
@@ -56,10 +59,10 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
 
         t.it('Test preLaunchHook return true', function(t) {
 
-            var ctrl = Ext.create('conjoon.cn_user.controller.PackageController');
+            var ctrl = Ext.create('coon.user.controller.PackageController');
 
-            conjoon.cn_user.Manager.loadUser();
-            t.expect(conjoon.cn_user.Manager.getUser()).not.toBeNull();
+            coon.user.Manager.loadUser();
+            t.expect(coon.user.Manager.getUser()).not.toBeNull();
             t.expect(ctrl.preLaunchHook()).toBe(true);
 
             testAuthWindowGone(t);
@@ -67,22 +70,22 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
         });
 
         /**
-         * conjoon/app-cn_user/#1
+         * coon/app-cn_user/#1
          */
         t.it('Test postLaunchHook to not return an empty object', function(t) {
 
-            var ctrl = Ext.create('conjoon.cn_user.controller.PackageController'),
+            var ctrl = Ext.create('coon.user.controller.PackageController'),
                 obj, exc = e = undefined;
 
-            t.expect(conjoon.cn_user.Manager.getUser()).toBeNull();
+            t.expect(coon.user.Manager.getUser()).toBeNull();
             try{ctrl.postLaunchHook();}catch(e){exc = e;}
 
             t.expect(exc).toBeDefined();
             t.expect(exc.msg).toContain('requires a valid user');
 
 
-            conjoon.cn_user.Manager.loadUser();
-            t.expect(conjoon.cn_user.Manager.getUser()).not.toBeNull();
+            coon.user.Manager.loadUser();
+            t.expect(coon.user.Manager.getUser()).not.toBeNull();
 
             obj = ctrl.postLaunchHook();
 
@@ -92,7 +95,7 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
             t.expect(obj.permaNav).toBeDefined();
             t.expect(obj.permaNav.length).toBe(2);
             t.expect(obj.permaNav[0].text).toBe(
-                conjoon.cn_user.Manager.getUser().get('username'));
+                coon.user.Manager.getUser().get('username'));
             t.expect(obj.permaNav[1].xtype).toBe(
                 'cn_user-toolbaruserimageitem');
 
@@ -100,7 +103,7 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
 
         t.it('Test loadUser (successful) with callbacks', function(t) {
 
-            var ctrl = Ext.create('conjoon.cn_user.controller.PackageController', {
+            var ctrl = Ext.create('coon.user.controller.PackageController', {
                     application : {
                         launch : function() {
                             wasLaunched = true;
@@ -110,7 +113,7 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
                 aw          = undefined,
                 wasLaunched = undefined;
 
-            t.expect(conjoon.cn_user.Manager.getUser()).toBeNull();
+            t.expect(coon.user.Manager.getUser()).toBeNull();
             t.expect(wasLaunched).toBeUndefined();
             t.expect(ctrl.authWindow).toBeNull();
             ctrl.preLaunchHook();
@@ -127,7 +130,7 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
 
         t.it('Test loadUser (failed) with callbacks', function(t) {
 
-            var ctrl = Ext.create('conjoon.cn_user.controller.PackageController', {
+            var ctrl = Ext.create('coon.user.controller.PackageController', {
                     application : {
                         launch : function() {
                             wasLaunched = true;
@@ -137,7 +140,7 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
                 aw          = undefined,
                 wasLaunched = undefined;
 
-            t.expect(conjoon.cn_user.Manager.getUser()).toBeNull();
+            t.expect(coon.user.Manager.getUser()).toBeNull();
             t.expect(wasLaunched).toBeUndefined();
             t.expect(ctrl.authWindow).toBeNull();
             ctrl.preLaunchHook();
@@ -154,7 +157,7 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
 
         t.it('Test userWasNotAuthorized to be empty function', function(t) {
 
-            var ctrl = Ext.create('conjoon.cn_user.controller.PackageController');
+            var ctrl = Ext.create('coon.user.controller.PackageController');
 
             t.expect(ctrl.userWasNotAuthorized).toBe(Ext.emptyFn);
         });
@@ -162,7 +165,7 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
 
         t.it('Test userAvailable()', function(t) {
 
-            var ctrl = Ext.create('conjoon.cn_user.controller.PackageController', {
+            var ctrl = Ext.create('coon.user.controller.PackageController', {
                     application : {
                         launch : function() {
                             wasLaunched = true;
@@ -186,7 +189,7 @@ describe('conjoon.cn_user.controller.PackageControllerTest', function(t) {
             ctrl.preLaunchHook();
             aw = testAuthWindowVisible(t);
 
-            ctrl.userAvailable(Ext.create('conjoon.cn_user.model.UserModel'));
+            ctrl.userAvailable(Ext.create('coon.user.model.UserModel'));
 
             testAuthWindowGone(t);
             t.expect(wasLaunched).toBe(true);

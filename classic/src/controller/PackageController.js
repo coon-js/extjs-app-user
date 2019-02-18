@@ -1,71 +1,74 @@
 /**
- * conjoon
- * (c) 2007-2017 conjoon.org
- * licensing@conjoon.org
- *
+ * coon.js
  * app-cn_user
- * Copyright (C) 2017 Thorsten Suckow-Homberg/conjoon.org
+ * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/app-cn_user
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 /**
  * This is the package controller of the app-cn_user package to be used with
- * {@link conjoon.cn_comp.app.Application}.
+ * {@link coon.comp.app.Application}.
  *
- * This controller will hook into the launch-process of {@link conjoon.cn_comp.app.Application#launch},
- * check if a user is available via {@link conjoon.cn_user.Manager#getUser} and
- * show {@link conjoon.cn_user.view.authentication.AuthWindow} to provide
+ * This controller will hook into the launch-process of {@link coon.comp.app.Application#launch},
+ * check if a user is available via {@link coon.user.Manager#getUser} and
+ * show {@link coon.user.view.authentication.AuthWindow} to provide
  * an authentication form. The {@link #preLaunchHook} method will return false until
- * a user is available via {@link conjoon.cn_user.Manager}.
+ * a user is available via {@link coon.user.Manager}.
  *
  *      @example
- *      Ext.define('conjoon.Application', {
+ *      Ext.define('coon.Application', {
  *
- *          extend : 'conjoon.cn_comp.app.Application',
+ *          extend : 'coon.comp.app.Application',
  *
  *          mainView : 'Ext.Panel',
  *
  *          controllers : [
- *              'conjoon.cn_user.controller.PackageController'
+ *              'coon.user.controller.PackageController'
  *          ]
  *
  *      });
  *
  */
-Ext.define('conjoon.cn_user.controller.PackageController', {
+Ext.define('coon.user.controller.PackageController', {
 
-    extend : 'conjoon.cn_core.app.PackageController',
+    extend : 'coon.core.app.PackageController',
 
     requires : [
-        'conjoon.cn_user.Manager',
-        'conjoon.cn_user.model.UserModel',
-        'conjoon.cn_user.view.authentication.AuthWindow',
-        'conjoon.cn_user.view.toolbar.UserImageItem'
+        'coon.user.Manager',
+        'coon.user.model.UserModel',
+        'coon.user.view.authentication.AuthWindow',
+        'coon.user.view.toolbar.UserImageItem'
     ],
 
 
     /**
-     * Stores a reference to an active {@link conjoon.cn_user.view.authentication.AuthWindow}, if any.
-     * @type {conjoon.cn_user.view.authentication.AuthWindow) authWindow
+     * Stores a reference to an active {@link coon.user.view.authentication.AuthWindow}, if any.
+     * @type {coon.user.view.authentication.AuthWindow) authWindow
      * @private
      */
     authWindow : null,
 
     /**
-     * Shows the {@link conjoon.cn_user.view.authentication.AuthWindow} if no
-     * user is available via {@link conjoon.cn_user.Manager#getUser}, and returns
+     * Shows the {@link coon.user.view.authentication.AuthWindow} if no
+     * user is available via {@link coon.user.Manager#getUser}, and returns
      * false. Returns true otherwise.
      *
      *@inheritdoc
@@ -74,7 +77,7 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
 
         var me = this;
 
-        if (!conjoon.cn_user.Manager.getUser()) {
+        if (!coon.user.Manager.getUser()) {
             this.createAuthWindow();
             return false;
         }
@@ -90,12 +93,12 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
      *
      * @throws if the UserManager is currently not managing a user.
      *
-     * @see conjoon.cn_user.Manager#getUser
+     * @see coon.user.Manager#getUser
      */
     postLaunchHook : function() {
 
         var me   = this,
-            user = conjoon.cn_user.Manager.getUser();
+            user = coon.user.Manager.getUser();
 
         if (!user) {
             Ext.raise({
@@ -119,7 +122,7 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
      * Closes the {@link #authWindow}, if any, and calls the launch-method
      * of {@link getAplication}.
      *
-     * @param {conjoon.cn_user.model.UserModel} userModel
+     * @param {coon.user.model.UserModel} userModel
      *
      * @protected
      *
@@ -128,10 +131,10 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
     userAvailable : function(userModel) {
         var me = this;
 
-        if (!(userModel instanceof conjoon.cn_user.model.UserModel)) {
+        if (!(userModel instanceof coon.user.model.UserModel)) {
             Ext.raise({
                 source : Ext.getClassName(me),
-                msg    : "Method needs userModel to be instance of conjoon.cn_user.model.UserModel"
+                msg    : "Method needs userModel to be instance of coon.user.model.UserModel"
             });
         }
 
@@ -143,7 +146,7 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
      * Method to call when a user could not be loaded.
      *
      * @param {Object} options The options that were passed as params to
-     * {@link conjoon.cn_user.Manager#loadUser}
+     * {@link coon.user.Manager#loadUser}
      *
      * @protected
      */
@@ -152,14 +155,14 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
     privates : {
 
         /**
-         * Creates and shows the {@link conjoon.cn_user.view.authentication.AuthWindow}
+         * Creates and shows the {@link coon.user.view.authentication.AuthWindow}
          * and makes it available in {@link #authWindow}
          *
-         * @return {conjoon.cn_user.view.authentication.AuthWindow}
+         * @return {coon.user.view.authentication.AuthWindow}
          */
         createAuthWindow : function() {
 
-            this.authWindow = Ext.create('conjoon.cn_user.view.authentication.AuthWindow', {
+            this.authWindow = Ext.create('coon.user.view.authentication.AuthWindow', {
                 listeners : {
                     destroy : function() {
                         this.authWindow = null;
@@ -173,9 +176,9 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
         },
 
         /**
-         * Callback for a successful attempt to load a user via {@link conjoon.cn_user.Manager#loadUser}
+         * Callback for a successful attempt to load a user via {@link coon.user.Manager#loadUser}
          *
-         * @param {conjoon.cn_user.model.UserModel} userModel
+         * @param {coon.user.model.UserModel} userModel
          *
          * see {@link #userAvailable}
          */
@@ -186,7 +189,7 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
         },
 
         /**
-         * Callback for a failed attempt to load a user via {@link conjoon.cn_user.Manager#loadUser}
+         * Callback for a failed attempt to load a user via {@link coon.user.Manager#loadUser}
          *
          * @param {Object} options
          *
@@ -199,24 +202,24 @@ Ext.define('conjoon.cn_user.controller.PackageController', {
 
         /**
          * Listener for the cn_user-authrequest-event triggered by the
-         * {@link conjoon.cn_user.view.authentication.AuthForm} which is used
+         * {@link coon.user.view.authentication.AuthForm} which is used
          * to log in a user.
          * Tries to load the application's user based on the userid and password
          * submitted via authInfo.
          * The callbacks for a successfull userload is {@link #onUserLoadSuccess},
          * for a failed attempt to load the user is {@link #onUserLoadFailure}.
          *
-         * @param {conjoon.cn_user.view.authentication.AuthForm} authForm
+         * @param {coon.user.view.authentication.AuthForm} authForm
          * @param {Object} authInfo
          *
-         * see {@link conjoon.cn_user.Manager#loadUser}
+         * see {@link coon.user.Manager#loadUser}
          * see {@link #onUserLoadSuccess}
          * see {@link #onUserLoadFailure}
          */
         onAuthRequest : function(authForm, authInfo) {
             var me = this;
 
-            conjoon.cn_user.Manager.loadUser({
+            coon.user.Manager.loadUser({
                 params  : authInfo,
                 success : me.onUserLoadSuccess,
                 failure : me.onUserLoadFailure,

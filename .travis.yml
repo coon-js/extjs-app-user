@@ -1,16 +1,15 @@
-# conjoon
-# (c) 2007-2017 conjoon.org
-# licensing@conjoon.org
 #
-# conjoon / app-cn_user
+# coon.js
+# app-cn_user
+# Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/app-cn_user
 #
 # This is the very basic travis configuration for the app-cn_core
-# package of the conjoon Open Source Project. It simply creates a
+# package of the coon Open Source Project. It simply creates a
 # workspace, adds this package and tries to build it while making sure
 # that required packages are merged into the workspace.
 language: node_js
 env:
-  - CN_PACKAGE="app-cn_user" CN_SENCHA_EXT_VERSION="6.2.0" CN_SENCHA_CMD_VERSION="6.5.3.6" CN_WORKSPACE="/tmp/conjoon"
+  - CN_PACKAGE="app-cn_user" CN_SENCHA_EXT_VERSION="6.2.0" CN_SENCHA_CMD_VERSION="6.5.3.6" CN_WORKSPACE="/tmp/coon"
 
 install:
   - gem install jsduck
@@ -34,11 +33,11 @@ before_script:
 
 # add requirements before building
 ## lib-cn_core
-  - "cd /tmp && wget  -O lib-cn_core.zip https://github.com/conjoon/lib-cn_core/archive/master.zip"
+  - "cd /tmp && wget  -O lib-cn_core.zip https://github.com/coon/lib-cn_core/archive/master.zip"
   - "unzip lib-cn_core.zip -d $CN_WORKSPACE/packages/local/"
   - "mv $CN_WORKSPACE/packages/local/lib-cn_core-master $CN_WORKSPACE/packages/local/lib-cn_core"
 ## lib-cn_comp
-  - "cd /tmp && wget  -O lib-cn_comp.zip https://github.com/conjoon/lib-cn_comp/archive/master.zip"
+  - "cd /tmp && wget  -O lib-cn_comp.zip https://github.com/coon/lib-cn_comp/archive/master.zip"
   - "unzip lib-cn_comp.zip -d $CN_WORKSPACE/packages/local/"
   - "mv $CN_WORKSPACE/packages/local/lib-cn_comp-master $CN_WORKSPACE/packages/local/lib-cn_comp"
 

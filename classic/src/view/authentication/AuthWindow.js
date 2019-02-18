@@ -1,43 +1,46 @@
 /**
- * conjoon
- * (c) 2007-2017 conjoon.org
- * licensing@conjoon.org
- *
+ * coon.js
  * app-cn_user
- * Copyright (C) 2017 Thorsten Suckow-Homberg/conjoon.org
+ * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/app-cn_user
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 /**
  * Authentication LockingWindow to present a login form. The form used within
- * the window is an instance of {@link conjoon.cn_user.view.authentication.AuthForm}.
+ * the window is an instance of {@link coon.user.view.authentication.AuthForm}.
  *
  *      @example
- *      Ext.create('conjoon.cn_user.view.authentication.AuthWindow', {
+ *      Ext.create('coon.user.view.authentication.AuthWindow', {
  *
  *      });
  *
  */
-Ext.define('conjoon.cn_user.view.authentication.AuthWindow', {
+Ext.define('coon.user.view.authentication.AuthWindow', {
 
-    extend: 'conjoon.cn_comp.window.LockingWindow',
+    extend: 'coon.comp.window.LockingWindow',
 
     alias: 'widget.cn_user-authwindow',
 
     requires: [
-        'conjoon.cn_user.view.authentication.AuthForm'
+        'coon.user.view.authentication.AuthForm'
     ],
 
     defaultFocus : 'cn_user-authform', // force focus on authform
@@ -76,7 +79,7 @@ Ext.define('conjoon.cn_user.view.authentication.AuthWindow', {
             me.relayEvents(me.down('cn_user-authform'), [
             /**
              * @event cn_user-authrequest
-             * @inheritdoc conjoon.cn_user.view.authentication.AuthForm#cn_user-authrequest
+             * @inheritdoc coon.user.view.authentication.AuthForm#cn_user-authrequest
              */
                 'cn_user-authrequest'
             ]);

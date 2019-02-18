@@ -1,30 +1,33 @@
 /**
- * conjoon
- * (c) 2007-2016 conjoon.org
- * licensing@conjoon.org
- *
+ * coon.js
  * app-cn_user
- * Copyright (C) 2016 Thorsten Suckow-Homberg/conjoon.org
+ * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/app-cn_user
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe('conjoon.cn_user.view.authentication.AuthFormTest', function(t) {
+describe('coon.user.view.authentication.AuthFormTest', function(t) {
 
     var form,
         createForm = function() {
-            form = Ext.create('conjoon.cn_user.view.authentication.AuthForm', {
+            form = Ext.create('coon.user.view.authentication.AuthForm', {
                 renderTo : document.body
             });
 
@@ -44,7 +47,7 @@ describe('conjoon.cn_user.view.authentication.AuthFormTest', function(t) {
     t.it("Should create and show the form", function(t) {
 
         var form = createForm();
-        t.expect(form instanceof conjoon.cn_comp.form.AutoCompleteForm).toBeTruthy();
+        t.expect(form instanceof coon.comp.form.AutoCompleteForm).toBeTruthy();
 
         t.expect(form.autoCompleteTrigger).toBeDefined();
         t.expect(form.autoCompleteTrigger).not.toBeNull();

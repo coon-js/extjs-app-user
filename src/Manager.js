@@ -1,39 +1,42 @@
 /**
- * conjoon
- * (c) 2007-2016 conjoon.org
- * licensing@conjoon.org
- *
+ * coon.js
  * app-cn_user
- * Copyright (C) 2016 Thorsten Suckow-Homberg/conjoon.org
+ * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/app-cn_user
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 /**
  * Class for managing an application user.
  * This is a singleton class which can be configured by providing custom
- * implementations of {@link conjoon.cn_user.UserProvider}. It till be used
+ * implementations of {@link coon.user.UserProvider}. It till be used
  * throughout the app-cn_user package to manage a single application user.
  * Note: This class' intention is not to manage a list of user. It's use case is
  * to solely provide tools to manage a user who is using the application.
  *
  *      @example
- *      conjoon.cn_user.Manager.setUserProvider(
- *          Ext.create('conjoon.cn_user.DefaultUserProvider')
+ *      coon.user.Manager.setUserProvider(
+ *          Ext.create('coon.user.DefaultUserProvider')
  *      );
  *
- *      var user = conjoon.cn_user.Manager.getUser();
+ *      var user = coon.user.Manager.getUser();
  *
  *      if (!user) {
  *          // your load config goes here, depending
@@ -52,32 +55,32 @@
  *              },
  *              scope : this
  *          };
- *          conjoon.cn_user.Manager.loadUser(options);
+ *          coon.user.Manager.loadUser(options);
  *      }
  *
  */
-Ext.define('conjoon.cn_user.Manager', {
+Ext.define('coon.user.Manager', {
 
     singleton : true,
 
     requires : [
-        'conjoon.cn_user.DefaultUserProvider'
+        'coon.user.DefaultUserProvider'
     ],
 
     /**
      *
-     * @cfg {Object/String} [providerConfig="conjoon.cn_user.DefaultUserProvider]
+     * @cfg {Object/String} [providerConfig="coon.user.DefaultUserProvider]
      * The classname of the provider to use, or an Object containing configuration
-     * information for the {@link conjoon.cn_user.UserProvider}. The object needs
+     * information for the {@link coon.user.UserProvider}. The object needs
      * at least the property "className" holding the fqn of the provider class
      * to use.
      * The class which is used as the UserProvider needs to be loaded before
      * it is used with the Manager.
      */
-    providerConfig : 'conjoon.cn_user.DefaultUserProvider',
+    providerConfig : 'coon.user.DefaultUserProvider',
 
     /**
-     * @type {conjoon.cn_user.UserProvider} userProvider
+     * @type {coon.user.UserProvider} userProvider
      * @private
      */
     userProvider : null,
@@ -86,12 +89,12 @@ Ext.define('conjoon.cn_user.Manager', {
      * Loads a user based on the information specified in options.params.
      * Additionally, success- and failure-callbacks can be specified which
      * get called as soon as the user was loaded, or if loading the user failed.
-     * See {@link conjoon.cn_user.UserProvider#cn_user-userload} and
-     * {@link conjoon.cn_user.UserProvider#cn_user-userloadfailure}
+     * See {@link coon.user.UserProvider#cn_user-userload} and
+     * {@link coon.user.UserProvider#cn_user-userloadfailure}
      *
      * @param {Object} options
      * @param {Object} options.params An object which will get passes to the
-     * {@link conjoon.cn_user.UserProvider#loadUser}-method
+     * {@link coon.user.UserProvider#loadUser}-method
      * @param {Function} options.success The callback for the successfull load
      * of the user
      * @param {Function} options.failure The callback for a failed load attempt
@@ -100,7 +103,7 @@ Ext.define('conjoon.cn_user.Manager', {
      * callbacks are to load
      *
      * @throws error if loading the user was triggered during an already existing
-     * load operation; see {@link conjoon.cn_user.UserProvider#isUserLoading},
+     * load operation; see {@link coon.user.UserProvider#isUserLoading},
      * or if success- or callback-properties are specified, but not valid functions.
      */
     loadUser : function(options) {
@@ -158,7 +161,7 @@ Ext.define('conjoon.cn_user.Manager', {
 
     /**
      * Returns the user managed by the configured {@link #userProvider}.
-     * See {@link conjoon.cn_user.UserProvider#getUser}.
+     * See {@link coon.user.UserProvider#getUser}.
      * Implementing APIs should be advised that loading a user via {@link #loadUser}
      * might be necessary, or otherwise this method will always return null.
      * If no UserProvider was configured for the UserManager yet, the method
@@ -166,7 +169,7 @@ Ext.define('conjoon.cn_user.Manager', {
      * the information found in  {@link #userProviderConfig}.
      *
      *
-     * @returns {conjoon.cn_user.model.UserModel|null}
+     * @returns {coon.user.model.UserModel|null}
      */
     getUser : function() {
         return this.getUserProvider().getUser();
@@ -177,7 +180,7 @@ Ext.define('conjoon.cn_user.Manager', {
      * is not configured, {@link #setUserProvider} will be called with the
      * default {@link #providerConfig} as found in this class to create one.
      *
-     * @returns {conjoon.cn_user.UserProvider}
+     * @returns {coon.user.UserProvider}
      *
      * see {@link #setUserProvider}
      */
@@ -194,23 +197,23 @@ Ext.define('conjoon.cn_user.Manager', {
      * Sets the {@link #userProvider} to an instance represented by the passed argument.
      * The argument can either be a class name, an instance or a configuration
      * object with a "cnclass"-property and additional instance configuration.
-     * In any case, the argument must represent an existing instance of {@link conjoon.cn_user.UserProvider}.
+     * In any case, the argument must represent an existing instance of {@link coon.user.UserProvider}.
      *
      *      @example
-     *      conjoon.cn_user.Manager.setUserProvider(
-     *          Ext.create('conjoon.cn_user.DefaultUserProvider')
+     *      coon.user.Manager.setUserProvider(
+     *          Ext.create('coon.user.DefaultUserProvider')
      *      );
      *      // or
-     *      conjoon.cn_user.Manager.setUserProvider(
-     *          'conjoon.cn_user.DefaultUserProvider'
+     *      coon.user.Manager.setUserProvider(
+     *          'coon.user.DefaultUserProvider'
      *      );
      *      // or
-     *      conjoon.cn_user.Manager.setUserProvider({
-     *          cnclass   : 'conjoon.cn_user.DefaultUserProvider',
+     *      coon.user.Manager.setUserProvider({
+     *          cnclass   : 'coon.user.DefaultUserProvider',
      *          cfgOption : 'foo'
      *      });
      *
-     * @param {conjoon.cn_user.UserProvider/Object/String} providerConfig
+     * @param {coon.user.UserProvider/Object/String} providerConfig
      *
      * see {@link #initUserProvider}
      */
@@ -236,7 +239,7 @@ Ext.define('conjoon.cn_user.Manager', {
          * Removes any listeners attached to the {@link #userProvider} by this Manager.
          * Nullifies {@link #callbackOptions}, too.
          *
-         * @param {conjoon.cn_user.UserProvider}
+         * @param {coon.user.UserProvider}
          *
          * @private
          */
@@ -262,10 +265,10 @@ Ext.define('conjoon.cn_user.Manager', {
 
         /**
          * Default callback for the {@link #userProvider}s
-         * {@link conjoon.cn_user.UserProvider#cn_user-userload} event.
+         * {@link coon.user.UserProvider#cn_user-userload} event.
          *
-         * @param {conjoon.cn_user.UserProvider} provider
-         * @param {conjoon.cn_user.model.UserModel} userModel
+         * @param {coon.user.UserProvider} provider
+         * @param {coon.user.model.UserModel} userModel
          *
          * @private
          */
@@ -283,9 +286,9 @@ Ext.define('conjoon.cn_user.Manager', {
 
         /**
          * Default callback for the {@link #userProvider}s
-         * {@link conjoon.cn_user.UserProvider#cn_user-userloadfailure} event.
+         * {@link coon.user.UserProvider#cn_user-userloadfailure} event.
          *
-         * @param {conjoon.cn_user.UserProvider} provider
+         * @param {coon.user.UserProvider} provider
          * @param {Object} options
          *
          * @private
@@ -305,9 +308,9 @@ Ext.define('conjoon.cn_user.Manager', {
         /**
          * Initializes the UserProvider-instance to be used by this Manager.
          *
-         * @param {conjoon.cn_user.UserProvider/Object/String} providerConfig
+         * @param {coon.user.UserProvider/Object/String} providerConfig
          *
-         * @return {conjoon.cn_user.UserProvider}
+         * @return {coon.user.UserProvider}
          * @private
          *
          * @throws error if the className computed by using the providerConfig argument
@@ -315,7 +318,7 @@ Ext.define('conjoon.cn_user.Manager', {
          */
         initUserProvider : function(providerConfig) {
 
-            if (providerConfig instanceof conjoon.cn_user.UserProvider) {
+            if (providerConfig instanceof coon.user.UserProvider) {
                 return providerConfig;
             }
 
@@ -353,11 +356,11 @@ Ext.define('conjoon.cn_user.Manager', {
 
             ret = Ext.create(className, cfg);
 
-            if (!(ret instanceof conjoon.cn_user.UserProvider)) {
+            if (!(ret instanceof coon.user.UserProvider)) {
                 Ext.raise({
                     sourceClass   : Ext.getClassName(this),
                     providerClass : ret,
-                    msg           : Ext.getClassName(this) + " providerConfig to represent an instance of conjoon.cn_user.UserProvider."
+                    msg           : Ext.getClassName(this) + " providerConfig to represent an instance of coon.user.UserProvider."
                 });
             }
 

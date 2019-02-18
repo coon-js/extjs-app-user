@@ -1,34 +1,37 @@
 /**
- * conjoon
- * (c) 2007-2016 conjoon.org
- * licensing@conjoon.org
- *
+ * coon.js
  * app-cn_user
- * Copyright (C) 2016 Thorsten Suckow-Homberg/conjoon.org
+ * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/app-cn_user
  *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without restriction,
+ * including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software,
+ * and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
  *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Software.
  *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+ * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+ * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 /**
  * Abstract base class for UserProvider-implementations.
- * For a default implementation, see {@link conjoon.cn_user.DefaultUserProvider}
+ * For a default implementation, see {@link coon.user.DefaultUserProvider}
  *
  * Implementing classes are advised to implement {@link #loadUser} in case {@link #getUser}
  * returns null. {@link #user} should be available by calling  {@link getUser}
  * as soon as the {@link #cn_user-userload}-event was triggered.
  */
-Ext.define('conjoon.cn_user.UserProvider', {
+Ext.define('coon.user.UserProvider', {
 
 
     mixins : {
@@ -40,20 +43,20 @@ Ext.define('conjoon.cn_user.UserProvider', {
      * This event is triggered as soon as a user is available when calling
      * {@link loadUser}. Custom classes are advised to implement the functionality
      * accordingly.
-     * @param {conjoon.cn_user.UserProvider} this
-     * @param {conjoon.cn_user.model.UserModel} user The user that was loaded.
+     * @param {coon.user.UserProvider} this
+     * @param {coon.user.model.UserModel} user The user that was loaded.
      */
 
     /**
      * @event cn_user-userloadfailure
      * This event is triggered when loading a user failed.
-     * @param {conjoon.cn_user.UserProvider} this
+     * @param {coon.user.UserProvider} this
      * @param {Object} options The options-object that was passed to the {@link #loadUser}
      * method.
      */
 
     /**
-     * @type {conjoon.cn_user.model.UserModel} The current user model made
+     * @type {coon.user.model.UserModel} The current user model made
      * available by this provider.
      * @protected
      */
@@ -104,7 +107,7 @@ Ext.define('conjoon.cn_user.UserProvider', {
     /**
      * Returns the current user loaded with this provider, if any.
      *
-     * @return {conjoon.cn_user.model.UserModel/null}
+     * @return {coon.user.model.UserModel/null}
      *
      * see {@link #user}
      */

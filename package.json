@@ -16,7 +16,7 @@
      * As a general rule, all classes that belong to this package should be under this namespace
      * if multiple namespaces are part of this package, set this to "".
      */
-    "namespace": "conjoon.cn_user",
+    "namespace": "coon.user",
 
     /**
      * The package type.
@@ -46,7 +46,7 @@
      * Required only if you are distributing this package through a Sencha Cmd repository,
      * in which case it should match the name you assign to your local package repository.
      */
-    "creator": "conjoon Open Source Project",
+    "creator": "coon Open Source Project",
 
     /**
      * A summarized description of this package.
@@ -56,7 +56,7 @@
     /**
      * A detailed description of this package.
      */
-    "detailedDescription": "This package contains basic functionality for authenticating a user against an application built with Sencha and the conjoon libraries. Requires lib-cn_comp.",
+    "detailedDescription": "This package contains basic functionality for authenticating a user against an application built with Sencha and the coon libraries. Requires lib-cn_comp.",
 
     /**
      * The package version.

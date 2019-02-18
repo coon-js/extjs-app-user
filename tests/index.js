@@ -1,31 +1,31 @@
 var harness = new Siesta.Harness.Browser.ExtJS();
 
 harness.configure({
-    title          : 'My Tests',
+    title          : 'app-cn_user',
     disableCaching : true,
     loaderPath     : {
         /**
          * Universal
          */
-        'conjoon.cn_user' : '../src',
+        'coon.user' : '../src',
 
         /**
          * Classic
          */
-        'conjoon.cn_user.view' : '../classic/src/view',
-        'conjoon.cn_user.controller' : '../classic/src/controller',
+        'coon.user.view' : '../classic/src/view',
+        'coon.user.controller' : '../classic/src/controller',
 
         /**
          * Requirements
          */
-        'conjoon.cn_core.data'   : '../../lib-cn_core/src/data',
-        'conjoon.cn_comp.form'   : '../../lib-cn_comp/classic/src/form',
-        'conjoon.cn_comp.window' : '../../lib-cn_comp/classic/src/window',
-        'conjoon.cn_core.app'    : '../../lib-cn_core/src/app'
+        'coon.core.data'   : '../../lib-cn_core/src/data',
+        'coon.comp.form'   : '../../lib-cn_comp/classic/src/form',
+        'coon.comp.window' : '../../lib-cn_comp/classic/src/window',
+        'coon.core.app'    : '../../lib-cn_core/src/app'
     },
     preload        : [
-        conjoon.tests.config.paths.extjs.css.url,
-        conjoon.tests.config.paths.extjs.js.url
+        coon.tests.config.paths.extjs.css.url,
+        coon.tests.config.paths.extjs.js.url
     ]
 });
 
