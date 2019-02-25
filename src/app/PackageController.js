@@ -40,14 +40,17 @@
  *
  *          mainView : 'Ext.Panel',
  *
+ *          // If specifying the PackageController in the requires-property of the app.json of the
+ *          // application which uses this package, you can omit the this.
  *          controllers : [
- *              'coon.user.controller.PackageController'
+ *              'coon.user.app.PackageController'
  *          ]
  *
  *      });
  *
+ *
  */
-Ext.define('coon.user.controller.PackageController', {
+Ext.define('coon.user.app.PackageController', {
 
     extend : 'coon.core.app.PackageController',
 

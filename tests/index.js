@@ -13,7 +13,6 @@ harness.configure({
          * Classic
          */
         'coon.user.view' : '../classic/src/view',
-        'coon.user.controller' : '../classic/src/controller',
 
         /**
          * Requirements
@@ -32,11 +31,6 @@ harness.configure({
 harness.start({
     group : 'classic',
     items : [{
-        group : 'controller',
-        items : [
-            'classic/src/controller/PackageControllerTest.js'
-        ]
-    }, {
         group : 'view',
         items : [{
             group : 'authentication',
@@ -57,6 +51,12 @@ harness.start({
         'src/DefaultUserProviderTest.js',
         'src/ManagerTest.js',
         'src/UserProviderTest.js',
+        {
+            group : 'app',
+            items : [
+                'src/app/PackageControllerTest.js'
+            ]
+        },
         {
             group : 'data',
             items : [{

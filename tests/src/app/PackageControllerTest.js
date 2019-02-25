@@ -23,7 +23,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe('coon.user.controller.PackageControllerTest', function(t) {
+describe('coon.user.app.PackageControllerTest', function(t) {
 
     var testAuthWindowGone = function(t) {
         var authWindow = Ext.ComponentQuery.query('cn_user-authwindow');
@@ -48,7 +48,7 @@ describe('coon.user.controller.PackageControllerTest', function(t) {
         });
 
         t.it('Test preLaunchHook return false', function(t) {
-            var ctrl = Ext.create('coon.user.controller.PackageController'),
+            var ctrl = Ext.create('coon.user.app.PackageController'),
                 authWindow;
 
             t.expect(coon.user.Manager.getUser()).toBeNull();
@@ -59,7 +59,7 @@ describe('coon.user.controller.PackageControllerTest', function(t) {
 
         t.it('Test preLaunchHook return true', function(t) {
 
-            var ctrl = Ext.create('coon.user.controller.PackageController');
+            var ctrl = Ext.create('coon.user.app.PackageController');
 
             coon.user.Manager.loadUser();
             t.expect(coon.user.Manager.getUser()).not.toBeNull();
@@ -74,7 +74,7 @@ describe('coon.user.controller.PackageControllerTest', function(t) {
          */
         t.it('Test postLaunchHook to not return an empty object', function(t) {
 
-            var ctrl = Ext.create('coon.user.controller.PackageController'),
+            var ctrl = Ext.create('coon.user.app.PackageController'),
                 obj, exc = e = undefined;
 
             t.expect(coon.user.Manager.getUser()).toBeNull();
@@ -103,7 +103,7 @@ describe('coon.user.controller.PackageControllerTest', function(t) {
 
         t.it('Test loadUser (successful) with callbacks', function(t) {
 
-            var ctrl = Ext.create('coon.user.controller.PackageController', {
+            var ctrl = Ext.create('coon.user.app.PackageController', {
                     application : {
                         launch : function() {
                             wasLaunched = true;
@@ -130,7 +130,7 @@ describe('coon.user.controller.PackageControllerTest', function(t) {
 
         t.it('Test loadUser (failed) with callbacks', function(t) {
 
-            var ctrl = Ext.create('coon.user.controller.PackageController', {
+            var ctrl = Ext.create('coon.user.app.PackageController', {
                     application : {
                         launch : function() {
                             wasLaunched = true;
@@ -157,7 +157,7 @@ describe('coon.user.controller.PackageControllerTest', function(t) {
 
         t.it('Test userWasNotAuthorized to be empty function', function(t) {
 
-            var ctrl = Ext.create('coon.user.controller.PackageController');
+            var ctrl = Ext.create('coon.user.app.PackageController');
 
             t.expect(ctrl.userWasNotAuthorized).toBe(Ext.emptyFn);
         });
@@ -165,7 +165,7 @@ describe('coon.user.controller.PackageControllerTest', function(t) {
 
         t.it('Test userAvailable()', function(t) {
 
-            var ctrl = Ext.create('coon.user.controller.PackageController', {
+            var ctrl = Ext.create('coon.user.app.PackageController', {
                     application : {
                         launch : function() {
                             wasLaunched = true;
