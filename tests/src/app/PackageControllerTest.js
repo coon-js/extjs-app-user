@@ -1,7 +1,7 @@
 /**
  * coon.js
- * app-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/app-cn_user
+ * lib-cn_user
+ * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -70,7 +70,7 @@ describe('coon.user.app.PackageControllerTest', function(t) {
         });
 
         /**
-         * coon/app-cn_user/#1
+         * coon/lib-cn_user/#1
          */
         t.it('Test postLaunchHook to not return an empty object', function(t) {
 

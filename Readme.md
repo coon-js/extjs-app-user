@@ -1,4 +1,4 @@
-# app-cn_user  [![Build Status](https://travis-ci.org/coon/app-cn_user.svg?branch=master)](https://travis-ci.org/coon/app-cn_user)
+# lib-cn_user  [![Build Status](https://travis-ci.org/coon/lib-cn_user.svg?branch=master)](https://travis-ci.org/coon/lib-cn_user)
 
 This **Sencha ExtJS** package provides functionality for managing user authentication, defining
 `pre`- and `postLaunchHooks` for an [lib-cn_comp](https://github.com/coon-js/lib-cn_comp) application (`coon.comp.app.Application`) as well as required views.
@@ -9,7 +9,7 @@ The following naming conventions apply:
 #### Namespace
 `coon.user.*`
 #### Package name
-`app-cn_user`
+`lib-cn_user`
 #### Shorthand to be used with providing aliases
 `cn_user`
 

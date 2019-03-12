@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project name="app-cn_user" default=".help">
+<project name="lib-cn_user" default=".help">
 
     <script language="javascript">
         <![CDATA[

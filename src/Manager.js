@@ -1,7 +1,7 @@
 /**
  * coon.js
- * app-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/app-cn_user
+ * lib-cn_user
+ * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -27,7 +27,7 @@
  * Class for managing an application user.
  * This is a singleton class which can be configured by providing custom
  * implementations of {@link coon.user.UserProvider}. It till be used
- * throughout the app-cn_user package to manage a single application user.
+ * throughout the lib-cn_user package to manage a single application user.
  * Note: This class' intention is not to manage a list of user. It's use case is
  * to solely provide tools to manage a user who is using the application.
  *

@@ -1,4 +1,4 @@
-# app-cn_user/src
+# lib-cn_user/src
 
 This folder contains source code that will automatically be added to the classpath when
 the package is used.

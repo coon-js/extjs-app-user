@@ -1,7 +1,7 @@
 /**
  * coon.js
- * app-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/app-cn_user
+ * lib-cn_user
+ * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -24,7 +24,7 @@
  */
 
 /**
- * This is the package controller of the app-cn_user package to be used with
+ * This is the package controller of the lib-cn_user package to be used with
  * {@link coon.comp.app.Application}.
  *
  * This controller will hook into the launch-process of {@link coon.comp.app.Application#launch},

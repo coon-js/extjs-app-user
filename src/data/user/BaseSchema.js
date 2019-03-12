@@ -1,7 +1,7 @@
 /**
  * coon.js
- * app-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/app-cn_user
+ * lib-cn_user
+ * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -24,7 +24,7 @@
  */
 
 /**
- * BaseSchema for app-cn_user.
+ * BaseSchema for lib-cn_user.
  */
 Ext.define('coon.user.data.user.BaseSchema', {
 

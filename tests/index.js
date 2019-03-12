@@ -1,7 +1,7 @@
 var harness = new Siesta.Harness.Browser.ExtJS();
 
 harness.configure({
-    title          : 'app-cn_user',
+    title          : 'lib-cn_user',
     disableCaching : true,
     loaderPath     : {
         /**

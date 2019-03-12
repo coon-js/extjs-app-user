@@ -1,5 +1,5 @@
 {
-    "name": "app-cn_user",
+    "name": "lib-cn_user",
 
     "sencha": {
         "namespace": "coon.user",
