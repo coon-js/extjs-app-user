@@ -147,13 +147,15 @@ Ext.define('coon.user.Manager', {
         provider.on(
             'cn_user-userload',
             me.onUserProviderLoad,
-            me
+            me,
+            {single : true}
         );
 
         provider.on(
             'cn_user-userloadfailure',
             me.onUserProviderLoadFailure,
-            me
+            me,
+            {single : true}
         );
 
         provider.loadUser(cfg);
