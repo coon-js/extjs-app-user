@@ -51,6 +51,7 @@ harness.start({
         'src/DefaultUserProviderTest.js',
         'src/ManagerTest.js',
         'src/UserProviderTest.js',
+        'src/UtilTest.js',
         {
             group : 'app',
             items : [
