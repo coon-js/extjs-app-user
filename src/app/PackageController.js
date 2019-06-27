@@ -186,8 +186,12 @@ Ext.define('coon.user.app.PackageController', {
          * see {@link #userAvailable}
          */
         onUserLoadSuccess : function(userModel) {
-            var me = this;
+            const me = this,
+                  authWindow = me.authWindow;
 
+            if (authWindow) {
+                authWindow.down('cn_user-authform').showAuthorizationBusy(false);
+            }
             me.userAvailable(userModel);
         },
 
@@ -196,10 +200,15 @@ Ext.define('coon.user.app.PackageController', {
          *
          * @param {Object} options
          *
-         * * see {@link #userWasNotAuthorized}
+         * see {@link #userWasNotAuthorized}
          */
         onUserLoadFailure : function(options) {
-            var me = this;
+            const me = this,
+                  authWindow = me.authWindow;
+
+            if (authWindow) {
+                authWindow.down('cn_user-authform').showAuthorizationBusy(false);
+            }
             me.userWasNotAuthorized(options);
         },
 
@@ -222,13 +231,14 @@ Ext.define('coon.user.app.PackageController', {
         onAuthRequest : function(authForm, authInfo) {
             var me = this;
 
+            authForm.showAuthorizationBusy(true);
+
             coon.user.Manager.loadUser({
                 params  : authInfo,
                 success : me.onUserLoadSuccess,
                 failure : me.onUserLoadFailure,
                 scope   : me
             });
-
         }
 
     }

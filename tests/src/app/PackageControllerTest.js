@@ -119,6 +119,8 @@ describe('coon.user.app.PackageControllerTest', function(t) {
             ctrl.preLaunchHook();
             aw = testAuthWindowVisible(t);
 
+            t.isCalledOnce('onUserLoadSuccess', ctrl);
+
             aw.fireEvent('cn_user-authrequest', aw.down('cn_user-authform'), {foo : 'bar'});
 
             testAuthWindowGone(t);
@@ -146,6 +148,8 @@ describe('coon.user.app.PackageControllerTest', function(t) {
             ctrl.preLaunchHook();
             aw = testAuthWindowVisible(t);
 
+
+            t.isCalledOnce('onUserLoadFailure', ctrl);
             aw.fireEvent('cn_user-authrequest', aw.down('cn_user-authform'), {forceFail : true});
 
             testAuthWindowVisible(t);
@@ -194,6 +198,54 @@ describe('coon.user.app.PackageControllerTest', function(t) {
             testAuthWindowGone(t);
             t.expect(wasLaunched).toBe(true);
             t.expect(ctrl.authWindow).toBeNull();
+        });
+
+
+        t.it("onAuthRequest()", function(t){
+
+            const ctrl = Ext.create('coon.user.app.PackageController');
+
+            coon.user.Manager.loadUser = Ext.emptyFn;
+
+            let BUSY = null;
+
+            ctrl.onAuthRequest({
+                showAuthorizationBusy : function(v) {
+                    BUSY = v;
+                }
+            });
+
+            t.expect(BUSY).toBe(true);
+        });
+
+
+        t.it('onUserLoadSuccess() / onUserLoadFailure()', function(t) {
+            const ctrl = Ext.create('coon.user.app.PackageController');
+
+            let BUSY = null;
+
+            ctrl.userAvailable = Ext.emptyFn;
+            ctrl.userWasNotAuthorized = Ext.emptyFn;
+
+            ctrl.authWindow = {
+                down : function() {
+                    return {
+                        showAuthorizationBusy : function(v) {
+                            BUSY = v;
+                        }
+                    }
+                }
+            }
+
+            ctrl.onUserLoadSuccess();
+            t.expect(BUSY).toBe(false);
+
+            BUSY = null;
+
+            ctrl.onUserLoadFailure();
+            t.expect(BUSY).toBe(false);
+
+
         });
 
     });
