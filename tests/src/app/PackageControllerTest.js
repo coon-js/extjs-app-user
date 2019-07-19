@@ -248,6 +248,33 @@ describe('coon.user.app.PackageControllerTest', function(t) {
 
         });
 
+
+        t.it('Test userAvailable() - no auth window', function(t) {
+
+            var ctrl = Ext.create('coon.user.app.PackageController', {
+                    application : {
+                        launch : function() {
+                            wasLaunched = true;
+                        }
+                    }
+                }),
+                wasLaunched = undefined;
+
+            ctrl.createAuthWindow = Ext.emptyFn;
+
+            t.expect(wasLaunched).toBeUndefined();
+
+            ctrl.preLaunchHook();
+
+            testAuthWindowGone(t);
+
+            ctrl.userAvailable(Ext.create('coon.user.model.UserModel'));
+
+            t.expect(wasLaunched).toBe(true);
+            t.expect(ctrl.authWindow).toBeNull();
+        });
+
+
     });
 
 

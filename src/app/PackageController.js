@@ -141,7 +141,10 @@ Ext.define('coon.user.app.PackageController', {
             });
         }
 
-        me.authWindow.close();
+        if (me.authWindow) {
+            me.authWindow.close();
+        }
+
         me.getApplication().launch();
     },
 
