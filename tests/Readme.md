@@ -20,4 +20,4 @@ package directory layout in a sencha workspace.
  - To run the tests with the modern toolkit, append the query string `toolkit=modern`
  
  *Example-URL:*
- `http://localhost:1841/packages/local/lib-cn_comp/tests/?toolkit=modern`
+ `http://localhost:1841/packages/local/lib-cn_user/tests/?toolkit=modern`
