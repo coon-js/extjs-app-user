@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,28 +23,19 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe('coon.user.view.toolbar.UserImageItemTest', function(t) {
+/**
+ * Implementation of Ext.Img to show a user icon.
+ * This class is used by the PackageController of lib-cn_user where it gets
+ * added to the permaNav in the postLaunchHook-process.
+ */
+Ext.define('coon.user.view.toolbar.UserImageItem', {
 
-    var img;
+    extend : 'Ext.Img',
 
+    alias : 'widget.cn_user-toolbaruserimageitem',
 
-    t.afterEach(function() {
-        if (!img) {
-            return;
-        }
-        img.destroy();
-        img = null;
-    });
+    cls : 'cn_user-toolbaruserimageitem',
 
-
-    t.it("Should create and test the UserImageItem", function(t) {
-
-        img = Ext.create('coon.user.view.toolbar.UserImageItem');
-
-        t.expect(img instanceof Ext.Img).toBe(true);
-
-        t.expect(img.alias).toContain('widget.cn_user-toolbaruserimageitem');
-    });
-
+    glyph: 'xf007@FontAwesome'
 
 });

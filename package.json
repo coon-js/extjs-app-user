@@ -4,7 +4,6 @@
     "sencha": {
         "namespace": "coon.user",
         "type": "code",
-        "toolkit": "classic",
         "creator": "coon.js",
         "summary": "Application package for lib-cn_comp supported Sencha ExtJS applications providing user authentication views and flow.",
         "detailedDescription": "Application package for lib-cn_comp supported Sencha ExtJS applications providing user authentication views and flow. Requires lib-cn_comp.",
