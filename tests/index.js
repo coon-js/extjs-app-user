@@ -37,6 +37,9 @@ harness.configure({
          */
         'coon.user' : '../src',
         'coon.comp.window.LockingWindow' : '../../lib-cn_comp/src/window/LockingWindow.js',
+        'coon.comp.Img'                   : (isModern
+                                            ? '../../lib-cn_comp/modern/src/Img.js'
+                                            : '../../lib-cn_comp/classic/src/Img.js'),
         'coon.comp.form.AutoCompleteForm' : (isModern
                                              ? '../../lib-cn_comp/modern/src/form/AutoCompleteForm.js'
                                              : '../../lib-cn_comp/classic/src/form/AutoCompleteForm.js'),

@@ -41,7 +41,7 @@ describe('coon.user.view.toolbar.UserImageItemTest', function(t) {
 
         img = Ext.create('coon.user.view.toolbar.UserImageItem');
 
-        t.expect(img instanceof Ext.Img).toBe(true);
+        t.isInstanceOf(img, "coon.comp.Img");
 
         t.expect(img.alias).toContain('widget.cn_user-toolbaruserimageitem');
     });

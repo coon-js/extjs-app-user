@@ -30,12 +30,13 @@
  */
 Ext.define('coon.user.view.toolbar.UserImageItem', {
 
-    extend : 'Ext.Img',
+    extend : 'coon.comp.Img',
 
     alias : 'widget.cn_user-toolbaruserimageitem',
 
     cls : 'cn_user-toolbaruserimageitem',
 
     glyph: 'xf007@FontAwesome'
+
 
 });
