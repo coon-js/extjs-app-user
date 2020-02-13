@@ -39,11 +39,33 @@ describe('coon.user.view.toolbar.UserImageItemTest', function(t) {
 
     t.it("Should create and test the UserImageItem", function(t) {
 
+        let tmpV = Ext.getVersion;
+
+        Ext.getVersion = function() {
+            return {
+                major : 6
+            };
+        };
+
+
         img = Ext.create('coon.user.view.toolbar.UserImageItem');
-
         t.isInstanceOf(img, "coon.comp.Img");
-
         t.expect(img.alias).toContain('widget.cn_user-toolbaruserimageitem');
+
+        t.expect(img.getGlyph().fontFamily).toBe("'FontAwesome'");
+
+
+        Ext.getVersion = function() {
+            return {
+                major : 7
+            };
+        };
+
+
+        img = Ext.create('coon.user.view.toolbar.UserImageItem');
+        t.expect(img.getGlyph().fontFamily).toBe("'Font Awesome 5 Free'");
+
+        Ext.getVersion = tmpV;
     });
 
 
