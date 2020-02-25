@@ -39,6 +39,10 @@
 Ext.define("coon.user.Util", {
 
 
+    requires : [
+        "coon.user.model.UserModel"
+    ],
+
     singleton : true,
 
     /**
