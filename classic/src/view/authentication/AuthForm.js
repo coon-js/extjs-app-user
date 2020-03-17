@@ -80,9 +80,9 @@ Ext.define('coon.user.view.authentication.AuthForm', {
 
     width : 415,
 
-    loginButtonIconCls : 'x-fa fa-angle-right',
+    loginButtonIconCls : 'fas fa-angle-right',
 
-    loginButtonIconClsBusy : 'x-fa fa-spinner fa-spin',
+    loginButtonIconClsBusy : 'fas fa-spinner fa-spin',
 
     layout : {
         type: 'vbox',
