@@ -23,37 +23,37 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe('coon.user.view.authentication.AuthWindowTest', function(t) {
+describe("coon.user.view.authentication.AuthWindowTest", function (t) {
 
-    t.it("Should create and show the window", function(t) {
+    t.it("Should create and show the window", function (t) {
 
-        var window = Ext.create('coon.user.view.authentication.AuthWindow');
+        var window = Ext.create("coon.user.view.authentication.AuthWindow");
 
         t.expect(window instanceof coon.comp.window.LockingWindow).toBeTruthy();
 
         t.expect(
-            window.down('cn_user-authform')
+            window.down("cn_user-authform")
                 instanceof coon.user.view.authentication.AuthForm
         ).toBeTruthy();
 
         if (Ext.isModern) {
-            t.expect(window.getDefaultFocus()).toBe('cn_user-authform');
+            t.expect(window.getDefaultFocus()).toBe("cn_user-authform");
         } else {
-            t.expect(window.defaultFocus).toBe('cn_user-authform');
+            t.expect(window.defaultFocus).toBe("cn_user-authform");
         }
 
         window.close();
 
     });
 
-    t.it("Relay event cn_user-authrequest should work properly", function(t) {
+    t.it("Relay event cn_user-authrequest should work properly", function (t) {
 
-        var window    = Ext.create('coon.user.view.authentication.AuthWindow'),
-            form      = window.down('cn_user-authform'),
+        var window    = Ext.create("coon.user.view.authentication.AuthWindow"),
+            form      = window.down("cn_user-authform"),
             evtForm, evtOptions,
-            params =  {foo : 'bar'};
+            params =  {foo : "bar"};
 
-        window.on('cn_user-authrequest', function(form, options) {
+        window.on("cn_user-authrequest", function (form, options) {
             evtForm    = form;
             evtOptions = options;
         });
@@ -61,12 +61,12 @@ describe('coon.user.view.authentication.AuthWindowTest', function(t) {
         t.expect(evtForm).toBeUndefined();
         t.expect(evtOptions).toBeUndefined();
 
-        form.fireEvent('cn_user-authrequest', form, params);
+        form.fireEvent("cn_user-authrequest", form, params);
 
         t.expect(evtForm).toBe(form);
         t.expect(evtOptions).toEqual(params);
 
         window.close();
-    })
+    });
 
 });

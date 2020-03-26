@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,11 +23,11 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe('coon.user.UserProviderTest', function(t) {
+describe("coon.user.UserProviderTest", function (t) {
 
-    t.it('Should create an instance of coon.user.UserProvider', function(t) {
+    t.it("Should create an instance of coon.user.UserProvider", function (t) {
 
-        var userProvider = Ext.create('coon.user.UserProvider', {
+        var userProvider = Ext.create("coon.user.UserProvider", {
         });
 
         t.expect(userProvider.loadUser).toBe(Ext.emptyFn);

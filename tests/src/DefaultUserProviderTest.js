@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,15 +23,15 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe('coon.user.DefaultUserProviderTest', function(t) {
+describe("coon.user.DefaultUserProviderTest", function (t) {
 
-    t.it('Basic tests of coon.user.DefaultUserProvider', function(t) {
+    t.it("Basic tests of coon.user.DefaultUserProvider", function (t) {
 
-        var userProvider = Ext.create('coon.user.DefaultUserProvider', {}),
+        var userProvider = Ext.create("coon.user.DefaultUserProvider", {}),
             evtProvider,
             evtModel,
             evtOptions,
-            failOptions = {forceFail : true, foo : 'bar'};
+            failOptions = {forceFail : true, foo : "bar"};
 
         t.expect(userProvider instanceof coon.user.UserProvider).toBeTruthy();
         t.expect(userProvider.getUser()).toBeNull();
@@ -39,12 +39,12 @@ describe('coon.user.DefaultUserProviderTest', function(t) {
         t.expect(evtProvider).toBeUndefined();
         t.expect(evtModel).toBeUndefined();
 
-        userProvider.on('cn_user-userload', function(userProvider, userModel) {
+        userProvider.on("cn_user-userload", function (userProvider, userModel) {
             evtProvider = userProvider;
             evtModel    = userModel;
         });
 
-        userProvider.on('cn_user-userloadfailure', function(userProvider, options) {
+        userProvider.on("cn_user-userloadfailure", function (userProvider, options) {
             evtProvider = userProvider;
             evtOptions  = options;
         });

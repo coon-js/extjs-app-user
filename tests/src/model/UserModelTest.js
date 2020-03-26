@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,70 +23,70 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe('coon.user.model.UserModelTest', function(t) {
+describe("coon.user.model.UserModelTest", function (t) {
 
     var model,
-        modelName = 'coon.user.model.UserModel',
-        getModelClass = function() {
+        modelName = "coon.user.model.UserModel",
+        getModelClass = function () {
             return eval(modelName);
         },
-        getSchemaClass = function() {
+        getSchemaClass = function () {
             return coon.user.data.user.BaseSchema;
         },
-        entityName = 'UserModel',
+        entityName = "UserModel",
         lastLoginDate = new Date(2015, 10, 5, 17, 15),
         data = {
-            firstname    : 'John',
-            lastname     : 'Smith',
-            username     : 'johnsmith',
-            emailAddress : 'johnsmith@coon.org',
+            firstname    : "John",
+            lastname     : "Smith",
+            username     : "johnsmith",
+            emailAddress : "johnsmith@coon.org",
             isRoot       : false,
-            lastLogin    : Ext.Date.format(lastLoginDate, 'timestamp')
+            lastLogin    : Ext.Date.format(lastLoginDate, "timestamp")
         },
         expected = {
-            password : ''
+            password : ""
         },
         presenceFields = [
-            'firstname',
-            'lastname',
-            'username',
-            'emailAddress'
+            "firstname",
+            "lastname",
+            "username",
+            "emailAddress"
         ],
-        modelShouldBeValid = function(t, model) {
+        modelShouldBeValid = function (t, model) {
             t.expect(model.isValid()).toBeTruthy();
         },
-        modelShouldBeInvalid = function(t, model) {
+        modelShouldBeInvalid = function (t, model) {
             t.expect(model.isValid()).toBeFalsy();
         };
 
 
-    t.beforeEach(function() {
+    t.beforeEach(function () {
         model = Ext.create(modelName, Ext.apply({}, data));
     });
 
-// +----------------------------------------------------------------------------
-// |                    =~. Unit Tests .~=
-// +----------------------------------------------------------------------------
+    // +----------------------------------------------------------------------------
+    // |                    =~. Unit Tests .~=
+    // +----------------------------------------------------------------------------
 
 
     /**
      * Test create
      */
-    t.it(Ext.String.format('Should create an instance of {0}', modelName), function(t) {
-       t.expect(model instanceof getModelClass()).toBeTruthy();
+    t.it(Ext.String.format("Should create an instance of {0}", modelName), function (t) {
+        t.expect(model instanceof getModelClass()).toBeTruthy();
     });
 
     /**
      * Test Schema
      */
-    t.it('Should return the proper schema', function(t) {
+    t.it("Should return the proper schema", function (t) {
         t.expect(model.schema instanceof getSchemaClass()).toBeTruthy();
     });
 
     /**
      * Test EntityName
      */
-    t.it('Should return the entity name', function(t) {
+    t.it("Should return the entity name", function (t) {
         t.expect(model.schema.getEntityName(model)).toBe(entityName);
     });
 
@@ -94,19 +94,19 @@ describe('coon.user.model.UserModelTest', function(t) {
     /**
      * Test getter fields
      */
-    t.it('Should check the fields\' values', function(t) {
+    t.it("Should check the fields' values", function (t) {
         // valid model
         for (var i in data) {
-            if (!data.hasOwnProperty(i)) {
+            if (!Object.prototype.hasOwnProperty.call(data, i)) {
                 continue;
             }
 
-            if (i === 'lastLogin') {
-                t.expect(model.get('lastLogin').toString())
-                 .toBe(lastLoginDate.toString());
+            if (i === "lastLogin") {
+                t.expect(model.get("lastLogin").toString())
+                    .toBe(lastLoginDate.toString());
             } else {
                 t.expect(model.get(i)).toBe(
-                    expected.hasOwnProperty(i) ? expected[i] : data[i]
+                    Object.prototype.hasOwnProperty.call(expected, i) ? expected[i] : data[i]
                 );
             }
         }
@@ -119,60 +119,60 @@ describe('coon.user.model.UserModelTest', function(t) {
      */
     for (var i = 0, len = presenceFields.length; i < len; i++) {
         var msg = Ext.String.format(
-            'Should not be valid if {0} is null',
+            "Should not be valid if {0} is null",
             presenceFields[i]
         );
-        (function(field) {
+        (function (field) {
 
-            t.it(msg, function(t) {
+            t.it(msg, function (t) {
                 modelShouldBeValid(t, model);
                 model.set(field, null);
                 modelShouldBeInvalid(t, model);
             });
 
         })(presenceFields[i]);
-     }
+    }
 
     /**
      * Test emailAddress field
      */
-    t.it('Should not be valid if emailAddress is malformed', function(t) {
+    t.it("Should not be valid if emailAddress is malformed", function (t) {
         modelShouldBeValid(t, model);
-        model.set('emailAddress', 'somestring@somedomain');
+        model.set("emailAddress", "somestring@somedomain");
         modelShouldBeInvalid(t, model);
     });
 
     /**
     * Test password field
     */
-    t.it('Should be able to set password directly', function(t) {
+    t.it("Should be able to set password directly", function (t) {
         modelShouldBeValid(t, model);
-        model.set('password', 'somestring');
-        t.expect(model.get('password')).toBe('somestring');
+        model.set("password", "somestring");
+        t.expect(model.get("password")).toBe("somestring");
         modelShouldBeValid(t, model);
     });
 
     /**
      * Test username field
      */
-    t.it('Should not be valid if username equals to "admin"', function(t) {
+    t.it("Should not be valid if username equals to \"admin\"", function (t) {
         modelShouldBeValid(t, model);
-        model.set('username', 'admin');
+        model.set("username", "admin");
         modelShouldBeInvalid(t, model);
     });
-    t.it('Should not be valid if username equals to "administrator"', function(t) {
+    t.it("Should not be valid if username equals to \"administrator\"", function (t) {
         modelShouldBeValid(t, model);
-        model.set('username', 'administrator');
+        model.set("username", "administrator");
         modelShouldBeInvalid(t, model);
     });
-    t.it('Should not be valid if username equals to "user"', function(t) {
+    t.it("Should not be valid if username equals to \"user\"", function (t) {
         modelShouldBeValid(t, model);
-        model.set('username', 'user');
+        model.set("username", "user");
         modelShouldBeInvalid(t, model);
     });
-    t.it('Should not be valid if username is less than 3 characters', function(t) {
+    t.it("Should not be valid if username is less than 3 characters", function (t) {
         modelShouldBeValid(t, model);
-        model.set('username', 'Pi');
+        model.set("username", "Pi");
         modelShouldBeInvalid(t, model);
     });
 

@@ -28,13 +28,13 @@
  * This class is used by the PackageController of lib-cn_user where it gets
  * added to the permaNav in the postLaunchHook-process.
  */
-Ext.define('coon.user.view.toolbar.UserImageItem', {
+Ext.define("coon.user.view.toolbar.UserImageItem", {
 
-    extend : 'coon.comp.Img',
+    extend : "coon.comp.Img",
 
-    alias : 'widget.cn_user-toolbaruserimageitem',
+    alias : "widget.cn_user-toolbaruserimageitem",
 
-    cls : 'cn_user-toolbaruserimageitem',
+    cls : "cn_user-toolbaruserimageitem",
 
 
     /**
@@ -42,7 +42,7 @@ Ext.define('coon.user.view.toolbar.UserImageItem', {
      * overriden to adjust Glyph Font Family depending on ExtJS Version.
      *
      */
-    constructor : function() {
+    constructor : function () {
 
         const
             me = this,
@@ -51,10 +51,9 @@ Ext.define('coon.user.view.toolbar.UserImageItem', {
         me.callParent(arguments);
 
         // ExtJS 7 uses "Font Awesome 5 Free" as the glyph Font Family.
-        me.setGlyph("xf007@\'" + (v >= 7 ? "Font Awesome 5 Free" : "FontAwesome") + "\'");
+        me.setGlyph("xf007@'" + (v >= 7 ? "Font Awesome 5 Free" : "FontAwesome") + "'");
 
     }
-
 
 
 });

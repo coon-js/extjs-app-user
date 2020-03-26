@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,33 +23,32 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe('coon.user.app.PackageControllerTest', function(t) {
+describe("coon.user.app.PackageControllerTest", function (t) {
 
-    var testAuthWindowGone = function(t) {
-        var authWindow = Ext.ComponentQuery.query('cn_user-authwindow');
+    var testAuthWindowGone = function (t) {
+        var authWindow = Ext.ComponentQuery.query("cn_user-authwindow");
         t.expect(authWindow).not.toBeNull();
         t.expect(authWindow).toBeDefined();
         t.expect(authWindow.length).toBe(0);
     };
 
-    var testAuthWindowVisible = function(t) {
-        var authWindow = Ext.ComponentQuery.query('cn_user-authwindow');
+    var testAuthWindowVisible = function (t) {
+        var authWindow = Ext.ComponentQuery.query("cn_user-authwindow");
         t.expect(authWindow).not.toBeNull();
         t.expect(authWindow).toBeDefined();
         t.expect(authWindow.length).toBe(1);
         t.expect(authWindow[0] instanceof coon.user.view.authentication.AuthWindow).toBeTruthy();
         t.expect(authWindow[0].isVisible()).toBeTruthy();
         return authWindow[0];
-    }
+    };
 
-    t.requireOk('coon.user.Manager', function() {
-        t.beforeEach(function() {
-            coon.user.Manager.setUserProvider(Ext.create('coon.user.DefaultUserProvider'));
+    t.requireOk("coon.user.Manager", function () {
+        t.beforeEach(function () {
+            coon.user.Manager.setUserProvider(Ext.create("coon.user.DefaultUserProvider"));
         });
 
-        t.it('Test preLaunchHook return false', function(t) {
-            var ctrl = Ext.create('coon.user.app.PackageController'),
-                authWindow;
+        t.it("Test preLaunchHook return false", function (t) {
+            var ctrl = Ext.create("coon.user.app.PackageController");
 
             t.expect(coon.user.Manager.getUser()).toBeNull();
             t.expect(ctrl.preLaunchHook()).toBe(false);
@@ -57,9 +56,9 @@ describe('coon.user.app.PackageControllerTest', function(t) {
             testAuthWindowVisible(t).close();
         });
 
-        t.it('Test preLaunchHook return true', function(t) {
+        t.it("Test preLaunchHook return true", function (t) {
 
-            var ctrl = Ext.create('coon.user.app.PackageController');
+            var ctrl = Ext.create("coon.user.app.PackageController");
 
             coon.user.Manager.loadUser();
             t.expect(coon.user.Manager.getUser()).not.toBeNull();
@@ -72,16 +71,16 @@ describe('coon.user.app.PackageControllerTest', function(t) {
         /**
          * coon/lib-cn_user/#1
          */
-        t.it('Test postLaunchHook to not return an empty object', function(t) {
+        t.it("Test postLaunchHook to not return an empty object", function (t) {
 
-            var ctrl = Ext.create('coon.user.app.PackageController'),
-                obj, exc = e = undefined;
+            var ctrl = Ext.create("coon.user.app.PackageController"),
+                obj, exc = undefined;
 
             t.expect(coon.user.Manager.getUser()).toBeNull();
             try{ctrl.postLaunchHook();}catch(e){exc = e;}
 
             t.expect(exc).toBeDefined();
-            t.expect(exc.msg).toContain('requires a valid user');
+            t.expect(exc.msg).toContain("requires a valid user");
 
 
             coon.user.Manager.loadUser();
@@ -95,17 +94,17 @@ describe('coon.user.app.PackageControllerTest', function(t) {
             t.expect(obj.permaNav).toBeDefined();
             t.expect(obj.permaNav.length).toBe(2);
             t.expect(obj.permaNav[0].text).toBe(
-                coon.user.Manager.getUser().get('username'));
+                coon.user.Manager.getUser().get("username"));
             t.expect(obj.permaNav[1].xtype).toBe(
-                'cn_user-toolbaruserimageitem');
+                "cn_user-toolbaruserimageitem");
 
         });
 
-        t.it('Test loadUser (successful) with callbacks', function(t) {
+        t.it("Test loadUser (successful) with callbacks", function (t) {
 
-            var ctrl = Ext.create('coon.user.app.PackageController', {
+            var ctrl = Ext.create("coon.user.app.PackageController", {
                     application : {
-                        launch : function() {
+                        launch : function () {
                             wasLaunched = true;
                         }
                     }
@@ -119,9 +118,9 @@ describe('coon.user.app.PackageControllerTest', function(t) {
             ctrl.preLaunchHook();
             aw = testAuthWindowVisible(t);
 
-            t.isCalledOnce('onUserLoadSuccess', ctrl);
+            t.isCalledOnce("onUserLoadSuccess", ctrl);
 
-            aw.fireEvent('cn_user-authrequest', aw.down('cn_user-authform'), {foo : 'bar'});
+            aw.fireEvent("cn_user-authrequest", aw.down("cn_user-authform"), {foo : "bar"});
 
             testAuthWindowGone(t);
 
@@ -130,11 +129,11 @@ describe('coon.user.app.PackageControllerTest', function(t) {
         });
 
 
-        t.it('Test loadUser (failed) with callbacks', function(t) {
+        t.it("Test loadUser (failed) with callbacks", function (t) {
 
-            var ctrl = Ext.create('coon.user.app.PackageController', {
+            var ctrl = Ext.create("coon.user.app.PackageController", {
                     application : {
-                        launch : function() {
+                        launch : function () {
                             wasLaunched = true;
                         }
                     }
@@ -149,8 +148,8 @@ describe('coon.user.app.PackageControllerTest', function(t) {
             aw = testAuthWindowVisible(t);
 
 
-            t.isCalledOnce('onUserLoadFailure', ctrl);
-            aw.fireEvent('cn_user-authrequest', aw.down('cn_user-authform'), {forceFail : true});
+            t.isCalledOnce("onUserLoadFailure", ctrl);
+            aw.fireEvent("cn_user-authrequest", aw.down("cn_user-authform"), {forceFail : true});
 
             testAuthWindowVisible(t);
 
@@ -159,31 +158,30 @@ describe('coon.user.app.PackageControllerTest', function(t) {
             aw.destroy();
         });
 
-        t.it('Test userWasNotAuthorized to be empty function', function(t) {
+        t.it("Test userWasNotAuthorized to be empty function", function (t) {
 
-            var ctrl = Ext.create('coon.user.app.PackageController');
+            var ctrl = Ext.create("coon.user.app.PackageController");
 
             t.expect(ctrl.userWasNotAuthorized).toBe(Ext.emptyFn);
         });
 
 
-        t.it('Test userAvailable()', function(t) {
+        t.it("Test userAvailable()", function (t) {
 
-            var ctrl = Ext.create('coon.user.app.PackageController', {
+            var ctrl = Ext.create("coon.user.app.PackageController", {
                     application : {
-                        launch : function() {
+                        launch : function () {
                             wasLaunched = true;
                         }
                     }
                 }),
-                aw          = undefined,
                 wasLaunched = undefined;
 
             t.expect(wasLaunched).toBeUndefined();
 
-            var exc = e = undefined;
+            var exc = undefined;
             try {
-                ctrl.userAvailable('foo');
+                ctrl.userAvailable("foo");
             } catch (e) {
                 exc = e;
             }
@@ -191,9 +189,9 @@ describe('coon.user.app.PackageControllerTest', function(t) {
             t.expect(exc.msg).toContain("needs userModel to be instance of");
 
             ctrl.preLaunchHook();
-            aw = testAuthWindowVisible(t);
+            testAuthWindowVisible(t);
 
-            ctrl.userAvailable(Ext.create('coon.user.model.UserModel'));
+            ctrl.userAvailable(Ext.create("coon.user.model.UserModel"));
 
             testAuthWindowGone(t);
             t.expect(wasLaunched).toBe(true);
@@ -201,16 +199,16 @@ describe('coon.user.app.PackageControllerTest', function(t) {
         });
 
 
-        t.it("onAuthRequest()", function(t){
+        t.it("onAuthRequest()", function (t){
 
-            const ctrl = Ext.create('coon.user.app.PackageController');
+            const ctrl = Ext.create("coon.user.app.PackageController");
 
             coon.user.Manager.loadUser = Ext.emptyFn;
 
             let BUSY = null;
 
             ctrl.onAuthRequest({
-                showAuthorizationBusy : function(v) {
+                showAuthorizationBusy : function (v) {
                     BUSY = v;
                 }
             });
@@ -219,8 +217,8 @@ describe('coon.user.app.PackageControllerTest', function(t) {
         });
 
 
-        t.it('onUserLoadSuccess() / onUserLoadFailure()', function(t) {
-            const ctrl = Ext.create('coon.user.app.PackageController');
+        t.it("onUserLoadSuccess() / onUserLoadFailure()", function (t) {
+            const ctrl = Ext.create("coon.user.app.PackageController");
 
             let BUSY = null;
 
@@ -228,14 +226,14 @@ describe('coon.user.app.PackageControllerTest', function(t) {
             ctrl.userWasNotAuthorized = Ext.emptyFn;
 
             ctrl.authWindow = {
-                down : function() {
+                down : function () {
                     return {
-                        showAuthorizationBusy : function(v) {
+                        showAuthorizationBusy : function (v) {
                             BUSY = v;
                         }
-                    }
+                    };
                 }
-            }
+            };
 
             ctrl.onUserLoadSuccess();
             t.expect(BUSY).toBe(false);
@@ -249,11 +247,11 @@ describe('coon.user.app.PackageControllerTest', function(t) {
         });
 
 
-        t.it('Test userAvailable() - no auth window', function(t) {
+        t.it("Test userAvailable() - no auth window", function (t) {
 
-            var ctrl = Ext.create('coon.user.app.PackageController', {
+            var ctrl = Ext.create("coon.user.app.PackageController", {
                     application : {
-                        launch : function() {
+                        launch : function () {
                             wasLaunched = true;
                         }
                     }
@@ -268,7 +266,7 @@ describe('coon.user.app.PackageControllerTest', function(t) {
 
             testAuthWindowGone(t);
 
-            ctrl.userAvailable(Ext.create('coon.user.model.UserModel'));
+            ctrl.userAvailable(Ext.create("coon.user.model.UserModel"));
 
             t.expect(wasLaunched).toBe(true);
             t.expect(ctrl.authWindow).toBeNull();
@@ -276,7 +274,6 @@ describe('coon.user.app.PackageControllerTest', function(t) {
 
 
     });
-
 
 
 });

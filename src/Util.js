@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -78,7 +78,7 @@ Ext.define("coon.user.Util", {
      * @throws if userModel is not an instance of {coon.user.model.UserModel} or if no valid
      * format was specified
      */
-    userToCredentials : function(userModel, format) {
+    userToCredentials : function (userModel, format) {
 
         const me = this;
 
@@ -90,19 +90,17 @@ Ext.define("coon.user.Util", {
         }
 
         switch (format) {
-            case me.BASIC_AUTH:
-                return btoa(userModel.get('username') + ':'  + userModel.get('password'));
+        case me.BASIC_AUTH:
+            return btoa(userModel.get("username") + ":"  + userModel.get("password"));
 
-            default:
-                Ext.raise({
-                    msg : "no valid value for \"format\" specified",
-                    format : format
-                });
+        default:
+            Ext.raise({
+                msg : "no valid value for \"format\" specified",
+                format : format
+            });
         }
 
     }
-
-
 
 
 });

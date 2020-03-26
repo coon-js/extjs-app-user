@@ -33,53 +33,53 @@
  *      });
  *
  */
-Ext.define('coon.user.view.authentication.AuthWindow', {
+Ext.define("coon.user.view.authentication.AuthWindow", {
 
-    extend: 'coon.comp.window.LockingWindow',
+    extend: "coon.comp.window.LockingWindow",
 
-    alias: 'widget.cn_user-authwindow',
+    alias: "widget.cn_user-authwindow",
 
     requires: [
-        'coon.user.view.authentication.AuthForm'
+        "coon.user.view.authentication.AuthForm"
     ],
 
-    defaultFocus : 'cn_user-authform', // force focus on authform
+    defaultFocus : "cn_user-authform", // force focus on authform
 
-    bodyCls: 'cn_user-authwindow',
+    bodyCls: "cn_user-authwindow",
 
     /**
      * @type {String}
      * @i18n_text
      */
-    title : 'Log in',
+    title : "Log in",
 
     layout : {
-        type  : 'vbox',
-        align : 'center',
-        pack  : 'center'
+        type  : "vbox",
+        align : "center",
+        pack  : "center"
     },
 
     items : [{
-        xtype : 'cn_user-authform'
+        xtype : "cn_user-authform"
     }],
 
-    listeners : Ext.isModern ? {initialize : 'onWindowAfterRender'} : {afterrender : 'onWindowAfterRender'},
+    listeners : Ext.isModern ? {initialize : "onWindowAfterRender"} : {afterrender : "onWindowAfterRender"},
 
     privates : {
 
         /**
          * @private
          */
-        onWindowAfterRender : function() {
+        onWindowAfterRender : function () {
             var me = this;
 
             // Relay events from the AuthForm
-            me.relayEvents(me.down('cn_user-authform'), [
+            me.relayEvents(me.down("cn_user-authform"), [
             /**
              * @event cn_user-authrequest
              * @inheritdoc coon.user.view.authentication.AuthForm#cn_user-authrequest
              */
-                'cn_user-authrequest'
+                "cn_user-authrequest"
             ]);
         }
     }

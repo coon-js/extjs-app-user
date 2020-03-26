@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -40,69 +40,69 @@
  * are prohibited. Backends persisting UserModels should take care of validating
  * nonetheless.
  */
-Ext.define('coon.user.model.UserModel', {
+Ext.define("coon.user.model.UserModel", {
 
-    extend : 'coon.core.data.BaseModel',
+    extend : "coon.core.data.BaseModel",
 
     requires : [
-        'coon.user.data.user.BaseSchema'
+        "coon.user.data.user.BaseSchema"
     ],
 
-    schema : 'cn_user-datauserbaseschema',
+    schema : "cn_user-datauserbaseschema",
 
     fields : [{
         // firstname
-        name : 'firstname',
-        type : 'string',
+        name : "firstname",
+        type : "string",
         validators : [{
-            type : 'presence'
+            type : "presence"
         }]
     }, {
         // lastname
-        name : 'lastname',
-        type : 'string',
+        name : "lastname",
+        type : "string",
         validators : [{
-            type : 'presence'
+            type : "presence"
         }]
     }, {
         // username
-        name : 'username',
-        type : 'string',
+        name : "username",
+        type : "string",
         validators : [{
-            type : 'exclusion',
-            list : ['admin', 'administrator', 'user']
+            type : "exclusion",
+            list : ["admin", "administrator", "user"]
         }, {
-            type : 'presence'
+            type : "presence"
         }, {
-            type : 'length',
+            type : "length",
             min  : 3
         }]
     }, {
         // emailAddress
-        name       : 'emailAddress',
-        type       : 'string',
+        name       : "emailAddress",
+        type       : "string",
         validators : [{
-            type : 'presence'
+            type : "presence"
         }, {
-            type : 'email'
+            type : "email"
         }]
     }, {
         // isRoot
-        name       : 'isRoot',
-        type       : 'boolean'
+        name       : "isRoot",
+        type       : "boolean"
     }, {
         // lastLogin
-        name       : 'lastLogin',
-        type       : 'date',
-        dateFormat : 'timestamp',
+        name       : "lastLogin",
+        type       : "date",
+        dateFormat : "timestamp",
         persist    : false
     },{
         // password
-        name         : 'password',
-        defaultValue : '' ,
+        name         : "password",
+        defaultValue : "" ,
         validators : [{
-            type : 'exclusion',
-            list : ['password', '1234', 'test']
+            type : "exclusion",
+            list : ["password", "1234", "test"]
         }]
     }]
 

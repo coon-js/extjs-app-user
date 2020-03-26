@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -50,15 +50,15 @@
  *
  *
  */
-Ext.define('coon.user.app.PackageController', {
+Ext.define("coon.user.app.PackageController", {
 
-    extend : 'coon.core.app.PackageController',
+    extend : "coon.core.app.PackageController",
 
     requires : [
-        'coon.user.Manager',
-        'coon.user.model.UserModel',
-        'coon.user.view.authentication.AuthWindow',
-        'coon.user.view.toolbar.UserImageItem'
+        "coon.user.Manager",
+        "coon.user.model.UserModel",
+        "coon.user.view.authentication.AuthWindow",
+        "coon.user.view.toolbar.UserImageItem"
     ],
 
 
@@ -76,9 +76,7 @@ Ext.define('coon.user.app.PackageController', {
      *
      *@inheritdoc
      */
-    preLaunchHook : function(app) {
-
-        var me = this;
+    preLaunchHook : function (app) {
 
         if (!coon.user.Manager.getUser()) {
             this.createAuthWindow();
@@ -98,10 +96,9 @@ Ext.define('coon.user.app.PackageController', {
      *
      * @see coon.user.Manager#getUser
      */
-    postLaunchHook : function() {
+    postLaunchHook : function () {
 
-        var me   = this,
-            user = coon.user.Manager.getUser();
+        var user = coon.user.Manager.getUser();
 
         if (!user) {
             Ext.raise({
@@ -112,10 +109,10 @@ Ext.define('coon.user.app.PackageController', {
 
         return {
             permaNav : [{
-                xtype : 'tbtext',
-                text  : user.get('username')
+                xtype : "tbtext",
+                text  : user.get("username")
             }, {
-                xtype  : 'cn_user-toolbaruserimageitem'
+                xtype  : "cn_user-toolbaruserimageitem"
             }]
         };
     },
@@ -131,7 +128,7 @@ Ext.define('coon.user.app.PackageController', {
      *
      * @throws if user Model is not an instance of {@link onjoon.cn_user.model.UserModel}
      */
-    userAvailable : function(userModel) {
+    userAvailable : function (userModel) {
         var me = this;
 
         if (!(userModel instanceof coon.user.model.UserModel)) {
@@ -166,14 +163,14 @@ Ext.define('coon.user.app.PackageController', {
          *
          * @return {coon.user.view.authentication.AuthWindow}
          */
-        createAuthWindow : function() {
+        createAuthWindow : function () {
 
-            this.authWindow = Ext.create('coon.user.view.authentication.AuthWindow', {
+            this.authWindow = Ext.create("coon.user.view.authentication.AuthWindow", {
                 listeners : {
-                    destroy : function() {
+                    destroy : function () {
                         this.authWindow = null;
                     },
-                    'cn_user-authrequest' : this.onAuthRequest,
+                    "cn_user-authrequest" : this.onAuthRequest,
                     scope : this
                 }
             });
@@ -188,12 +185,12 @@ Ext.define('coon.user.app.PackageController', {
          *
          * see {@link #userAvailable}
          */
-        onUserLoadSuccess : function(userModel) {
+        onUserLoadSuccess : function (userModel) {
             const me = this,
-                  authWindow = me.authWindow;
+                authWindow = me.authWindow;
 
             if (authWindow) {
-                authWindow.down('cn_user-authform').showAuthorizationBusy(false);
+                authWindow.down("cn_user-authform").showAuthorizationBusy(false);
             }
             me.userAvailable(userModel);
         },
@@ -205,12 +202,12 @@ Ext.define('coon.user.app.PackageController', {
          *
          * see {@link #userWasNotAuthorized}
          */
-        onUserLoadFailure : function(options) {
+        onUserLoadFailure : function (options) {
             const me = this,
-                  authWindow = me.authWindow;
+                authWindow = me.authWindow;
 
             if (authWindow) {
-                authWindow.down('cn_user-authform').showAuthorizationBusy(false);
+                authWindow.down("cn_user-authform").showAuthorizationBusy(false);
             }
             me.userWasNotAuthorized(options);
         },
@@ -231,7 +228,7 @@ Ext.define('coon.user.app.PackageController', {
          * see {@link #onUserLoadSuccess}
          * see {@link #onUserLoadFailure}
          */
-        onAuthRequest : function(authForm, authInfo) {
+        onAuthRequest : function (authForm, authInfo) {
             var me = this;
 
             authForm.showAuthorizationBusy(true);
@@ -245,7 +242,6 @@ Ext.define('coon.user.app.PackageController', {
         }
 
     }
-
 
 
 });

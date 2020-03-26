@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -26,14 +26,14 @@
 /**
  * BaseSchema for lib-cn_user.
  */
-Ext.define('coon.user.data.user.BaseSchema', {
+Ext.define("coon.user.data.user.BaseSchema", {
 
-    extend : 'coon.core.data.schema.BaseSchema',
+    extend : "coon.core.data.schema.BaseSchema",
 
-    alias : 'schema.cn_user-datauserbaseschema',
+    alias : "schema.cn_user-datauserbaseschema",
 
-    namespace : 'coon.user.model',
+    namespace : "coon.user.model",
 
-    id : 'cn_user-datauserbaseschema'
+    id : "cn_user-datauserbaseschema"
 
 });

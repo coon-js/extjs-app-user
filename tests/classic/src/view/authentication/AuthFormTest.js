@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,11 +23,11 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe('coon.user.view.authentication.AuthFormTest', function(t) {
+describe("coon.user.view.authentication.AuthFormTest", function (t) {
 
     var form,
-        createForm = function() {
-            form = Ext.create('coon.user.view.authentication.AuthForm', {
+        createForm = function () {
+            form = Ext.create("coon.user.view.authentication.AuthForm", {
                 renderTo : document.body
             });
 
@@ -35,7 +35,7 @@ describe('coon.user.view.authentication.AuthFormTest', function(t) {
         };
 
 
-    t.afterEach(function() {
+    t.afterEach(function () {
         if (!form) {
             return;
         }
@@ -44,7 +44,7 @@ describe('coon.user.view.authentication.AuthFormTest', function(t) {
     });
 
 
-    t.it("Should create and show the form", function(t) {
+    t.it("Should create and show the form", function (t) {
 
         var form = createForm();
         t.expect(form instanceof coon.comp.form.AutoCompleteForm).toBeTruthy();
@@ -52,69 +52,69 @@ describe('coon.user.view.authentication.AuthFormTest', function(t) {
         t.expect(form.autoCompleteTrigger).toBeDefined();
         t.expect(form.autoCompleteTrigger).not.toBeNull();
 
-        t.expect(form.autoCompleteTrigger.reference).toBe('loginButton');
+        t.expect(form.autoCompleteTrigger.reference).toBe("loginButton");
         t.expect(form.autoCompleteTrigger.actionUrl).toBe(form.defaultFakeActionUrl);
 
 
-        t.expect(form.formName).toBe('authForm');
+        t.expect(form.formName).toBe("authForm");
 
 
     });
 
-    t.it("Should focus the userid field", function(t) {
+    t.it("Should focus the userid field", function (t) {
         var form = createForm();
         form.focus();
-        t.expect(document.activeElement).toBe(form.down('textfield[name=userid]').inputEl.dom);
+        t.expect(document.activeElement).toBe(form.down("textfield[name=userid]").inputEl.dom);
     });
 
-    t.it("Should require userid", function(t) {
+    t.it("Should require userid", function (t) {
 
         var form = createForm();
-        form.down('textfield[name=password]').setValue('abc');
+        form.down("textfield[name=password]").setValue("abc");
         t.expect(form.isValid()).toBeFalsy();
-        t.expect(form.down('button[reference=loginButton]').isDisabled()).toBeTruthy()
+        t.expect(form.down("button[reference=loginButton]").isDisabled()).toBeTruthy();
     });
 
-    t.it("Should require password", function(t) {
+    t.it("Should require password", function (t) {
         var form = createForm();
-        form.down('textfield[name=userid]').setValue('abc');
+        form.down("textfield[name=userid]").setValue("abc");
         t.expect(form.isValid()).toBeFalsy();
-        t.expect(form.down('button[reference=loginButton]').isDisabled()).toBeTruthy()
+        t.expect(form.down("button[reference=loginButton]").isDisabled()).toBeTruthy();
     });
 
-    t.it("Should be valid if both fields are set", function(t) {
+    t.it("Should be valid if both fields are set", function (t) {
         var form = createForm();
-        form.down('textfield[name=userid]').setValue('abc');
-        form.down('textfield[name=password]').setValue('abc');
+        form.down("textfield[name=userid]").setValue("abc");
+        form.down("textfield[name=password]").setValue("abc");
         t.expect(form.isValid()).toBeTruthy();
 
         // wait for form binding to refresh
-        t.waitForMs(500, function(){
-            t.expect(form.down('button[reference=loginButton]').isDisabled()).toBeFalsy();
+        t.waitForMs(500, function (){
+            t.expect(form.down("button[reference=loginButton]").isDisabled()).toBeFalsy();
         });
     });
 
 
-    t.it("Form submit should trigger cn_user-authrequest event", function(t) {
+    t.it("Form submit should trigger cn_user-authrequest event", function (t) {
 
         var form   = createForm(),
             signal = undefined,
             signaledForm;
 
-        form.down('textfield[name=userid]').setValue('useridValue');
-        form.down('textfield[name=password]').setValue('passwordValue');
+        form.down("textfield[name=userid]").setValue("useridValue");
+        form.down("textfield[name=password]").setValue("passwordValue");
 
-        form.on('cn_user-authrequest', function(formPanel, authinfo) {
+        form.on("cn_user-authrequest", function (formPanel, authinfo) {
             signal       = authinfo;
             signaledForm = formPanel;
         });
 
-        t.waitForMs(500, function(){
-            t.click(form.down('button[reference=loginButton]'), function() {
+        t.waitForMs(500, function (){
+            t.click(form.down("button[reference=loginButton]"), function () {
                 t.expect(signaledForm).toBe(form);
                 t.expect(signal).toEqual({
-                    userid   : 'useridValue',
-                    password : 'passwordValue'
+                    userid   : "useridValue",
+                    password : "passwordValue"
                 });
             });
 
@@ -122,23 +122,23 @@ describe('coon.user.view.authentication.AuthFormTest', function(t) {
 
     });
 
-    t.it("Enter key should trigger form submit", function(t) {
+    t.it("Enter key should trigger form submit", function (t) {
 
         var form   = createForm(),
             signal = undefined;
 
-        form.down('textfield[name=userid]').setValue('useridValue1');
-        form.down('textfield[name=password]').setValue('passwordValue1');
+        form.down("textfield[name=userid]").setValue("useridValue1");
+        form.down("textfield[name=password]").setValue("passwordValue1");
 
-        form.on('cn_user-authrequest', function(formPanel, authinfo) {
+        form.on("cn_user-authrequest", function (formPanel, authinfo) {
             signal = authinfo;
         });
 
-        t.waitForMs(600, function(){
-            t.keyPress(form.down('textfield[name=password]'), '[RETURN]', undefined, function() {
+        t.waitForMs(600, function (){
+            t.keyPress(form.down("textfield[name=password]"), "[RETURN]", undefined, function () {
                 t.expect(signal).toEqual({
-                    userid   : 'useridValue1',
-                    password : 'passwordValue1'
+                    userid   : "useridValue1",
+                    password : "passwordValue1"
                 });
 
             });
@@ -146,10 +146,10 @@ describe('coon.user.view.authentication.AuthFormTest', function(t) {
         });
     });
 
-    t.it("Should show that authorization failed", function(t) {
+    t.it("Should show that authorization failed", function (t) {
 
         var form  = createForm(),
-            label = form.lookupReference('authFailedLabel'),
+            label = form.lookupReference("authFailedLabel"),
             f;
 
         t.expect(label).toBeDefined();
@@ -166,20 +166,19 @@ describe('coon.user.view.authentication.AuthFormTest', function(t) {
         t.expect(label.isVisible()).toBe(false);
     });
 
-    t.it("Should hide authorization failed if a new login attempt is made", function(t) {
+    t.it("Should hide authorization failed if a new login attempt is made", function (t) {
 
         var form  = createForm(),
-            label = form.lookupReference('authFailedLabel'),
-            f;
+            label = form.lookupReference("authFailedLabel");
 
         label.setVisible(true);
 
-        form.down('textfield[name=userid]').setValue('useridValue1');
-        form.down('textfield[name=password]').setValue('passwordValue1');
+        form.down("textfield[name=userid]").setValue("useridValue1");
+        form.down("textfield[name=password]").setValue("passwordValue1");
 
-        t.waitForMs(500, function(){
+        t.waitForMs(500, function (){
             t.expect(label.isVisible()).toBe(true);
-            t.keyPress(form.down('textfield[name=password]'), '[RETURN]', undefined, function() {
+            t.keyPress(form.down("textfield[name=password]"), "[RETURN]", undefined, function () {
                 t.expect(label.isVisible()).toBe(false);
             });
 
@@ -189,12 +188,12 @@ describe('coon.user.view.authentication.AuthFormTest', function(t) {
     });
 
 
-    t.it("Should show that the form is busy sending an auth request", function(t) {
+    t.it("Should show that the form is busy sending an auth request", function (t) {
 
         var form          = createForm(),
             useridField   = form.down("textfield[name=userid]"),
             passwordField = form.down("textfield[name=password]"),
-            loginButton   = form.lookupReference('loginButton'),
+            loginButton   = form.lookupReference("loginButton"),
             f;
 
         t.expect(useridField.isDisabled()).toBe(false);
@@ -202,10 +201,10 @@ describe('coon.user.view.authentication.AuthFormTest', function(t) {
         t.expect(loginButton.isDisabled()).toBe(true);
         t.expect(loginButton.iconCls).toBe(form.loginButtonIconCls);
 
-        useridField.setValue('abc');
-        passwordField.setValue('abc');
+        useridField.setValue("abc");
+        passwordField.setValue("abc");
 
-        t.waitForMs(600, function() {
+        t.waitForMs(600, function () {
 
             t.expect(loginButton.isDisabled()).toBe(false);
 

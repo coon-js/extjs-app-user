@@ -29,39 +29,39 @@ const harness = new Siesta.Harness.Browser.ExtJS();
 let isModern = window.location.href.indexOf("toolkit=modern") !== -1;
 
 harness.configure({
-    title          : 'lib-cn_user - ' + (isModern ? "modern" : "classic"),
+    title          : "lib-cn_user - " + (isModern ? "modern" : "classic"),
     disableCaching : true,
     loaderPath     : {
         /**
          * Universal
          */
-        'coon.user' : '../src',
-        'coon.comp.window.LockingWindow' : '../../lib-cn_comp/src/window/LockingWindow.js',
-        'coon.comp.Img'                   : (isModern
-                                            ? '../../lib-cn_comp/modern/src/Img.js'
-                                            : '../../lib-cn_comp/classic/src/Img.js'),
-        'coon.comp.form.AutoCompleteForm' : (isModern
-                                             ? '../../lib-cn_comp/modern/src/form/AutoCompleteForm.js'
-                                             : '../../lib-cn_comp/classic/src/form/AutoCompleteForm.js'),
-        'coon.user.view.toolbar.UserImageItem' : '../src/view/toolbar/UserImageItem.js',
+        "coon.user" : "../src",
+        "coon.comp.window.LockingWindow" : "../../lib-cn_comp/src/window/LockingWindow.js",
+        "coon.comp.Img"                   : (isModern
+            ? "../../lib-cn_comp/modern/src/Img.js"
+            : "../../lib-cn_comp/classic/src/Img.js"),
+        "coon.comp.form.AutoCompleteForm" : (isModern
+            ? "../../lib-cn_comp/modern/src/form/AutoCompleteForm.js"
+            : "../../lib-cn_comp/classic/src/form/AutoCompleteForm.js"),
+        "coon.user.view.toolbar.UserImageItem" : "../src/view/toolbar/UserImageItem.js",
 
-        'coon.user.view.authentication.AuthWindow' : '../src/view/authentication/AuthWindow.js',
+        "coon.user.view.authentication.AuthWindow" : "../src/view/authentication/AuthWindow.js",
 
-        'coon.user.view.authentication.AuthForm' : (isModern
-            ? '../modern/src/view/authentication/AuthForm.js'
-            : '../classic/src/view/authentication/AuthForm.js'),
+        "coon.user.view.authentication.AuthForm" : (isModern
+            ? "../modern/src/view/authentication/AuthForm.js"
+            : "../classic/src/view/authentication/AuthForm.js"),
 
         /**
          * Classic
          */
-        'coon.user.view' : '../classic/src/view',
+        "coon.user.view" : "../classic/src/view",
 
         /**
          * Requirements
          */
-        'coon.core.data'   : '../../lib-cn_core/src/data',
-        'coon.comp.form'   : '../../lib-cn_comp/classic/src/form',
-        'coon.core.app'    : '../../lib-cn_core/src/app'
+        "coon.core.data"   : "../../lib-cn_core/src/data",
+        "coon.comp.form"   : "../../lib-cn_comp/classic/src/form",
+        "coon.core.app"    : "../../lib-cn_core/src/app"
     },
     preload        : [
         coon.tests.config.paths.extjs[isModern ? "modern" : "classic" ].css.url,
@@ -76,13 +76,13 @@ let groups = [];
 // +--------------------------------
 if (!isModern) {
     groups.push({
-        group : 'classic',
+        group : "classic",
         items : [{
-            group : 'view',
+            group : "view",
             items : [{
-                group : 'authentication',
+                group : "authentication",
                 items : [
-                    'classic/src/view/authentication/AuthFormTest.js'
+                    "classic/src/view/authentication/AuthFormTest.js"
                 ]
             }]
         }]
@@ -94,13 +94,13 @@ if (!isModern) {
 // +--------------------------------
 if (isModern) {
     groups.push({
-        group : 'modern',
+        group : "modern",
         items : [{
-            group : 'view',
+            group : "view",
             items : [{
-                group : 'authentication',
+                group : "authentication",
                 items : [
-                    'modern/src/view/authentication/AuthFormTest.js'
+                    "modern/src/view/authentication/AuthFormTest.js"
                 ]
             }]
         }]
@@ -112,40 +112,40 @@ if (isModern) {
 // | Universal Tests
 // +--------------------------------
 groups.push({
-    group : 'universal',
+    group : "universal",
     items : [
-        'src/DefaultUserProviderTest.js',
-        'src/ManagerTest.js',
-        'src/UserProviderTest.js',
-        'src/UtilTest.js',
+        "src/DefaultUserProviderTest.js",
+        "src/ManagerTest.js",
+        "src/UserProviderTest.js",
+        "src/UtilTest.js",
         {
-            group : 'app',
+            group : "app",
             items : [
-                'src/app/PackageControllerTest.js'
+                "src/app/PackageControllerTest.js"
             ]
         },
         {
-            group : 'data',
+            group : "data",
             items : [{
-                group : 'user',
+                group : "user",
                 items : [
-                    'src/data/user/BaseSchemaTest.js'
+                    "src/data/user/BaseSchemaTest.js"
                 ]
             }]
         }, {
-            group : 'model',
+            group : "model",
             items : [
-                'src/model/UserModelTest.js'
+                "src/model/UserModelTest.js"
             ]
         }, {
-            group : 'view',
+            group : "view",
             items : [{
-                group : 'toolbar',
-                items : ['src/view/toolbar/UserImageItemTest.js']
+                group : "toolbar",
+                items : ["src/view/toolbar/UserImageItemTest.js"]
             }, {
-                group : 'authentication',
+                group : "authentication",
                 items : [
-                    'src/view/authentication/AuthWindowTest.js'
+                    "src/view/authentication/AuthWindowTest.js"
                 ]
             }]
         }

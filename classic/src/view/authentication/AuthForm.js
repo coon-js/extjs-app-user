@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -49,11 +49,11 @@
  *      });
  *
  */
-Ext.define('coon.user.view.authentication.AuthForm', {
+Ext.define("coon.user.view.authentication.AuthForm", {
 
-    extend: 'coon.comp.form.AutoCompleteForm',
+    extend: "coon.comp.form.AutoCompleteForm",
 
-    alias: 'widget.cn_user-authform',
+    alias: "widget.cn_user-authform",
 
     /**
      * @event cn_user-authrequest
@@ -64,103 +64,103 @@ Ext.define('coon.user.view.authentication.AuthForm', {
      * @param {String} authinfo.password The password submitted
      */
 
-    formName : 'authForm',
+    formName : "authForm",
 
     autoCompleteTrigger : {
-        reference : 'loginButton'
+        reference : "loginButton"
     },
 
-    defaultButton : 'loginButton',
+    defaultButton : "loginButton",
 
-    bodyPadding : '20 20',
+    bodyPadding : "20 20",
 
-    cls : 'cn_user-authform',
+    cls : "cn_user-authform",
 
     header : false,
 
     width : 415,
 
-    loginButtonIconCls : 'fas fa-angle-right',
+    loginButtonIconCls : "fas fa-angle-right",
 
-    loginButtonIconClsBusy : 'fas fa-spinner fa-spin',
+    loginButtonIconClsBusy : "fas fa-spinner fa-spin",
 
     layout : {
-        type: 'vbox',
-        align: 'stretch'
+        type: "vbox",
+        align: "stretch"
     },
 
     defaults : {
-        margin : '5 0'
+        margin : "5 0"
     },
 
     items: [{
-        xtype : 'label',
-        cls   : 'head-label',
+        xtype : "label",
+        cls   : "head-label",
         /**
          * @i18n_text
          */
-        text  : 'Sign in'
+        text  : "Sign in"
     }, {
-        xtype       : 'textfield',
-        name        : 'userid',
+        xtype       : "textfield",
+        name        : "userid",
         allowBlank  : false,
         /**
          * @i18n_text
          */
-        emptyText   : 'user id'
+        emptyText   : "user id"
     }, {
-        margin      : '24 0 0 0',
-        xtype       : 'textfield',
+        margin      : "24 0 0 0",
+        xtype       : "textfield",
         /**
          * @i18n_text
          */
-        emptyText   : 'password',
-        inputType   : 'password',
-        name        : 'password',
+        emptyText   : "password",
+        inputType   : "password",
+        name        : "password",
         allowBlank  : false
     }, {
-        margin      : '24 0 0 0',
-        xtype      : 'button',
-        reference  : 'loginButton',
+        margin      : "24 0 0 0",
+        xtype      : "button",
+        reference  : "loginButton",
         /**
          * @i18n_text
          */
-        text       : 'Login',
+        text       : "Login",
         formBind   : true,
-        handler    : function(btn) {
+        handler    : function (btn) {
             var me        = this,
-                formPanel = me.up('cn_user-authform'),
-                userid    = formPanel.down('textfield[name=userid]').getValue(),
-                password  = formPanel.down('textfield[name=password]').getValue();
+                formPanel = me.up("cn_user-authform"),
+                userid    = formPanel.down("textfield[name=userid]").getValue(),
+                password  = formPanel.down("textfield[name=password]").getValue();
 
 
             formPanel.showAuthorizationFailed(false);
 
-            formPanel.fireEvent('cn_user-authrequest', formPanel, {
+            formPanel.fireEvent("cn_user-authrequest", formPanel, {
                 userid   : userid,
                 password : password
             });
         }
     }, {
-        xtype     : 'label',
+        xtype     : "label",
         hidden    : true,
-        reference : 'authFailedLabel',
+        reference : "authFailedLabel",
         /**
          * @i18n_text
          */
-        text : 'Authorization failed. Please try again.'
+        text : "Authorization failed. Please try again."
     }],
 
 
     /**
      * @inheritdoc
      */
-    initComponent : function() {
+    initComponent : function () {
 
         var me = this;
 
         for (var i = 0, len = me.items.length; i < len; i++) {
-            if (me.items[i].reference === 'loginButton') {
+            if (me.items[i].reference === "loginButton") {
                 me.items[i].iconCls = me.loginButtonIconCls;
             }
         }
@@ -178,12 +178,12 @@ Ext.define('coon.user.view.authentication.AuthForm', {
      *
      * @return this
      */
-    showAuthorizationBusy : function(show) {
+    showAuthorizationBusy : function (show) {
 
         var me            = this,
             useridField   = me.down("textfield[name=userid]"),
             passwordField = me.down("textfield[name=password]"),
-            loginButton   = me.lookupReference('loginButton');
+            loginButton   = me.lookupReference("loginButton");
 
         if (show) {
             loginButton.setIconCls(me.loginButtonIconClsBusy);
@@ -211,10 +211,10 @@ Ext.define('coon.user.view.authentication.AuthForm', {
      *
      * @return this
      */
-    showAuthorizationFailed : function(show) {
+    showAuthorizationFailed : function (show) {
 
         var me    = this,
-            label = me.lookupReference('authFailedLabel');
+            label = me.lookupReference("authFailedLabel");
 
         label.setVisible(show);
 

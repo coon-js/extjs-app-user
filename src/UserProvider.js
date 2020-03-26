@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -31,11 +31,11 @@
  * returns null. {@link #user} should be available by calling  {@link getUser}
  * as soon as the {@link #cn_user-userload}-event was triggered.
  */
-Ext.define('coon.user.UserProvider', {
+Ext.define("coon.user.UserProvider", {
 
 
     mixins : {
-        observable : 'Ext.util.Observable'
+        observable : "Ext.util.Observable"
     },
 
     /**
@@ -66,7 +66,7 @@ Ext.define('coon.user.UserProvider', {
      * Creates a new instance of this USerProvider-class.
      * @param {Object} config
      */
-    constructor : function(config) {
+    constructor : function (config) {
 
         var me = this;
 
@@ -111,7 +111,7 @@ Ext.define('coon.user.UserProvider', {
      *
      * see {@link #user}
      */
-    getUser : function() {
+    getUser : function () {
         return this.user;
     }
 
