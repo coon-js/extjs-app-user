@@ -106,8 +106,8 @@ Ext.define('coon.user.app.PackageController', {
         if (!user) {
             Ext.raise({
                 source : Ext.getClassName(this),
-                msg    : Ext.getClassName(this) + "#postLaunchHool requires a valid user"
-            })
+                msg    : Ext.getClassName(this) + "#postLaunchHook requires a valid user"
+            });
         }
 
         return {

@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -36,11 +36,15 @@ describe('coon.user.view.authentication.AuthWindowTest', function(t) {
                 instanceof coon.user.view.authentication.AuthForm
         ).toBeTruthy();
 
-        t.expect(window.defaultFocus).toBe('cn_user-authform');
+        if (Ext.isModern) {
+            t.expect(window.getDefaultFocus()).toBe('cn_user-authform');
+        } else {
+            t.expect(window.defaultFocus).toBe('cn_user-authform');
+        }
 
         window.close();
 
-    }),
+    });
 
     t.it("Relay event cn_user-authrequest should work properly", function(t) {
 

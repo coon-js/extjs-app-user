@@ -1,7 +1,7 @@
 /**
  * coon.js
  * lib-cn_user
- * Copyright (C) 2019 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * Copyright (C) 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -63,9 +63,7 @@ Ext.define('coon.user.view.authentication.AuthWindow', {
         xtype : 'cn_user-authform'
     }],
 
-    listeners : {
-        afterrender : 'onWindowAfterRender'
-    },
+    listeners : Ext.isModern ? {initialize : 'onWindowAfterRender'} : {afterrender : 'onWindowAfterRender'},
 
     privates : {
 

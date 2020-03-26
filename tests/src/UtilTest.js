@@ -27,6 +27,21 @@ describe('coon.user.UtilTest', function(t) {
 
 t.requireOk('coon.user.Util', function() {
 
+    // Run this test first to make sure it's not accidently fixed by loading
+    // requirements during other tests
+    t.it("lib-cn_user#5", function (t) {
+
+        let exc;
+        try {
+            coon.user.Util.userToCredentials({}, coon.user.Util.BASIC_AUTH);
+        } catch (e) {
+            exc = e;
+        }
+
+        t.expect(exc.msg).toContain("must be an instance");
+    });
+
+
     t.it('userToCredentials()', function(t) {
 
         const userModel = Ext.create('coon.user.model.UserModel', {
@@ -65,8 +80,6 @@ t.requireOk('coon.user.Util', function() {
 
 
     });
-
-
 
 
 });
