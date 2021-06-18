@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017-2021 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,7 +23,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe("coon.user.view.toolbar.UserImageItemTest", function (t) {
+StartTest((t) => {
 
     var img;
 
@@ -37,13 +37,13 @@ describe("coon.user.view.toolbar.UserImageItemTest", function (t) {
     });
 
 
-    t.it("Should create and test the UserImageItem", function (t) {
+    t.it("Should create and test the UserImageItem", (t) => {
 
         let tmpV = Ext.getVersion;
 
         Ext.getVersion = function () {
             return {
-                major : 6
+                major: 6
             };
         };
 
@@ -57,7 +57,7 @@ describe("coon.user.view.toolbar.UserImageItemTest", function (t) {
 
         Ext.getVersion = function () {
             return {
-                major : 7
+                major: 7
             };
         };
 

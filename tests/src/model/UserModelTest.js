@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,7 +23,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe("coon.user.model.UserModelTest", function (t) {
+StartTest((t) => {
 
     var model,
         modelName = "coon.user.model.UserModel",
@@ -36,15 +36,15 @@ describe("coon.user.model.UserModelTest", function (t) {
         entityName = "UserModel",
         lastLoginDate = new Date(2015, 10, 5, 17, 15),
         data = {
-            firstname    : "John",
-            lastname     : "Smith",
-            username     : "johnsmith",
-            emailAddress : "johnsmith@coon.org",
-            isRoot       : false,
-            lastLogin    : Ext.Date.format(lastLoginDate, "timestamp")
+            firstname: "John",
+            lastname: "Smith",
+            username: "johnsmith",
+            emailAddress: "johnsmith@coon.org",
+            isRoot: false,
+            lastLogin: Ext.Date.format(lastLoginDate, "timestamp")
         },
         expected = {
-            password : ""
+            password: ""
         },
         presenceFields = [
             "firstname",
@@ -72,21 +72,21 @@ describe("coon.user.model.UserModelTest", function (t) {
     /**
      * Test create
      */
-    t.it(Ext.String.format("Should create an instance of {0}", modelName), function (t) {
+    t.it(Ext.String.format("Should create an instance of {0}", modelName), (t) => {
         t.expect(model instanceof getModelClass()).toBeTruthy();
     });
 
     /**
      * Test Schema
      */
-    t.it("Should return the proper schema", function (t) {
+    t.it("Should return the proper schema", (t) => {
         t.expect(model.schema instanceof getSchemaClass()).toBeTruthy();
     });
 
     /**
      * Test EntityName
      */
-    t.it("Should return the entity name", function (t) {
+    t.it("Should return the entity name", (t) => {
         t.expect(model.schema.getEntityName(model)).toBe(entityName);
     });
 
@@ -94,7 +94,7 @@ describe("coon.user.model.UserModelTest", function (t) {
     /**
      * Test getter fields
      */
-    t.it("Should check the fields' values", function (t) {
+    t.it("Should check the fields' values", (t) => {
         // valid model
         for (var i in data) {
             if (!Object.prototype.hasOwnProperty.call(data, i)) {
@@ -124,7 +124,7 @@ describe("coon.user.model.UserModelTest", function (t) {
         );
         (function (field) {
 
-            t.it(msg, function (t) {
+            t.it(msg, (t) => {
                 modelShouldBeValid(t, model);
                 model.set(field, null);
                 modelShouldBeInvalid(t, model);
@@ -136,7 +136,7 @@ describe("coon.user.model.UserModelTest", function (t) {
     /**
      * Test emailAddress field
      */
-    t.it("Should not be valid if emailAddress is malformed", function (t) {
+    t.it("Should not be valid if emailAddress is malformed", (t) => {
         modelShouldBeValid(t, model);
         model.set("emailAddress", "somestring@somedomain");
         modelShouldBeInvalid(t, model);
@@ -145,7 +145,7 @@ describe("coon.user.model.UserModelTest", function (t) {
     /**
     * Test password field
     */
-    t.it("Should be able to set password directly", function (t) {
+    t.it("Should be able to set password directly", (t) => {
         modelShouldBeValid(t, model);
         model.set("password", "somestring");
         t.expect(model.get("password")).toBe("somestring");
@@ -155,22 +155,22 @@ describe("coon.user.model.UserModelTest", function (t) {
     /**
      * Test username field
      */
-    t.it("Should not be valid if username equals to \"admin\"", function (t) {
+    t.it("Should not be valid if username equals to \"admin\"", (t) => {
         modelShouldBeValid(t, model);
         model.set("username", "admin");
         modelShouldBeInvalid(t, model);
     });
-    t.it("Should not be valid if username equals to \"administrator\"", function (t) {
+    t.it("Should not be valid if username equals to \"administrator\"", (t) => {
         modelShouldBeValid(t, model);
         model.set("username", "administrator");
         modelShouldBeInvalid(t, model);
     });
-    t.it("Should not be valid if username equals to \"user\"", function (t) {
+    t.it("Should not be valid if username equals to \"user\"", (t) => {
         modelShouldBeValid(t, model);
         model.set("username", "user");
         modelShouldBeInvalid(t, model);
     });
-    t.it("Should not be valid if username is less than 3 characters", function (t) {
+    t.it("Should not be valid if username is less than 3 characters", (t) => {
         modelShouldBeValid(t, model);
         model.set("username", "Pi");
         modelShouldBeInvalid(t, model);

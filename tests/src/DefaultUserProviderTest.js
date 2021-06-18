@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,15 +23,15 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe("coon.user.DefaultUserProviderTest", function (t) {
+StartTest((t) => {
 
-    t.it("Basic tests of coon.user.DefaultUserProvider", function (t) {
+    t.it("Basic tests of coon.user.DefaultUserProvider", (t) => {
 
         var userProvider = Ext.create("coon.user.DefaultUserProvider", {}),
             evtProvider,
             evtModel,
             evtOptions,
-            failOptions = {forceFail : true, foo : "bar"};
+            failOptions = {forceFail: true, foo: "bar"};
 
         t.expect(userProvider instanceof coon.user.UserProvider).toBeTruthy();
         t.expect(userProvider.getUser()).toBeNull();

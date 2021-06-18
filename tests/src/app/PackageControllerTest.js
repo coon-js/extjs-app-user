@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,16 +23,16 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe("coon.user.app.PackageControllerTest", function (t) {
+StartTest((t) => {
 
-    var testAuthWindowGone = function (t) {
+    var testAuthWindowGone = (t) => {
         var authWindow = Ext.ComponentQuery.query("cn_user-authwindow");
         t.expect(authWindow).not.toBeNull();
         t.expect(authWindow).toBeDefined();
         t.expect(authWindow.length).toBe(0);
     };
 
-    var testAuthWindowVisible = function (t) {
+    var testAuthWindowVisible = (t) => {
         var authWindow = Ext.ComponentQuery.query("cn_user-authwindow");
         t.expect(authWindow).not.toBeNull();
         t.expect(authWindow).toBeDefined();
@@ -47,7 +47,7 @@ describe("coon.user.app.PackageControllerTest", function (t) {
             coon.user.Manager.setUserProvider(Ext.create("coon.user.DefaultUserProvider"));
         });
 
-        t.it("Test preLaunchHook return false", function (t) {
+        t.it("Test preLaunchHook return false", (t) => {
             var ctrl = Ext.create("coon.user.app.PackageController");
 
             t.expect(coon.user.Manager.getUser()).toBeNull();
@@ -56,7 +56,7 @@ describe("coon.user.app.PackageControllerTest", function (t) {
             testAuthWindowVisible(t).close();
         });
 
-        t.it("Test preLaunchHook return true", function (t) {
+        t.it("Test preLaunchHook return true", (t) => {
 
             var ctrl = Ext.create("coon.user.app.PackageController");
 
@@ -69,9 +69,9 @@ describe("coon.user.app.PackageControllerTest", function (t) {
         });
 
         /**
-         * coon/lib-cn_user/#1
+         * coon/extjs-app-user/#1
          */
-        t.it("Test postLaunchHook to not return an empty object", function (t) {
+        t.it("Test postLaunchHook to not return an empty object", (t) => {
 
             var ctrl = Ext.create("coon.user.app.PackageController"),
                 obj, exc = undefined;
@@ -100,11 +100,11 @@ describe("coon.user.app.PackageControllerTest", function (t) {
 
         });
 
-        t.it("Test loadUser (successful) with callbacks", function (t) {
+        t.it("Test loadUser (successful) with callbacks", (t) => {
 
             var ctrl = Ext.create("coon.user.app.PackageController", {
-                    application : {
-                        launch : function () {
+                    application: {
+                        launch: function () {
                             wasLaunched = true;
                         }
                     }
@@ -120,7 +120,7 @@ describe("coon.user.app.PackageControllerTest", function (t) {
 
             t.isCalledOnce("onUserLoadSuccess", ctrl);
 
-            aw.fireEvent("cn_user-authrequest", aw.down("cn_user-authform"), {foo : "bar"});
+            aw.fireEvent("cn_user-authrequest", aw.down("cn_user-authform"), {foo: "bar"});
 
             testAuthWindowGone(t);
 
@@ -129,11 +129,11 @@ describe("coon.user.app.PackageControllerTest", function (t) {
         });
 
 
-        t.it("Test loadUser (failed) with callbacks", function (t) {
+        t.it("Test loadUser (failed) with callbacks", (t) => {
 
             var ctrl = Ext.create("coon.user.app.PackageController", {
-                    application : {
-                        launch : function () {
+                    application: {
+                        launch: function () {
                             wasLaunched = true;
                         }
                     }
@@ -149,7 +149,7 @@ describe("coon.user.app.PackageControllerTest", function (t) {
 
 
             t.isCalledOnce("onUserLoadFailure", ctrl);
-            aw.fireEvent("cn_user-authrequest", aw.down("cn_user-authform"), {forceFail : true});
+            aw.fireEvent("cn_user-authrequest", aw.down("cn_user-authform"), {forceFail: true});
 
             testAuthWindowVisible(t);
 
@@ -158,7 +158,7 @@ describe("coon.user.app.PackageControllerTest", function (t) {
             aw.destroy();
         });
 
-        t.it("Test userWasNotAuthorized to be empty function", function (t) {
+        t.it("Test userWasNotAuthorized to be empty function", (t) => {
 
             var ctrl = Ext.create("coon.user.app.PackageController");
 
@@ -166,11 +166,11 @@ describe("coon.user.app.PackageControllerTest", function (t) {
         });
 
 
-        t.it("Test userAvailable()", function (t) {
+        t.it("Test userAvailable()", (t) => {
 
             var ctrl = Ext.create("coon.user.app.PackageController", {
-                    application : {
-                        launch : function () {
+                    application: {
+                        launch: function () {
                             wasLaunched = true;
                         }
                     }
@@ -208,7 +208,7 @@ describe("coon.user.app.PackageControllerTest", function (t) {
             let BUSY = null;
 
             ctrl.onAuthRequest({
-                showAuthorizationBusy : function (v) {
+                showAuthorizationBusy: function (v) {
                     BUSY = v;
                 }
             });
@@ -217,7 +217,7 @@ describe("coon.user.app.PackageControllerTest", function (t) {
         });
 
 
-        t.it("onUserLoadSuccess() / onUserLoadFailure()", function (t) {
+        t.it("onUserLoadSuccess() / onUserLoadFailure()", (t) => {
             const ctrl = Ext.create("coon.user.app.PackageController");
 
             let BUSY = null;
@@ -226,9 +226,9 @@ describe("coon.user.app.PackageControllerTest", function (t) {
             ctrl.userWasNotAuthorized = Ext.emptyFn;
 
             ctrl.authWindow = {
-                down : function () {
+                down: function () {
                     return {
-                        showAuthorizationBusy : function (v) {
+                        showAuthorizationBusy: function (v) {
                             BUSY = v;
                         }
                     };
@@ -247,11 +247,11 @@ describe("coon.user.app.PackageControllerTest", function (t) {
         });
 
 
-        t.it("Test userAvailable() - no auth window", function (t) {
+        t.it("Test userAvailable() - no auth window", (t) => {
 
             var ctrl = Ext.create("coon.user.app.PackageController", {
-                    application : {
-                        launch : function () {
+                    application: {
+                        launch: function () {
                             wasLaunched = true;
                         }
                     }

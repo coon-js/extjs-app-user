@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -24,7 +24,7 @@
  */
 
 /**
- * This is the package controller of the lib-cn_user package to be used with
+ * This is the package controller of the extjs-app-user package to be used with
  * {@link coon.comp.app.Application}.
  *
  * This controller will hook into the launch-process of {@link coon.comp.app.Application#launch},
@@ -52,9 +52,9 @@
  */
 Ext.define("coon.user.app.PackageController", {
 
-    extend : "coon.core.app.PackageController",
+    extend: "coon.core.app.PackageController",
 
-    requires : [
+    requires: [
         "coon.user.Manager",
         "coon.user.model.UserModel",
         "coon.user.view.authentication.AuthWindow",
@@ -67,7 +67,7 @@ Ext.define("coon.user.app.PackageController", {
      * @type {coon.user.view.authentication.AuthWindow) authWindow
      * @private
      */
-    authWindow : null,
+    authWindow: null,
 
     /**
      * Shows the {@link coon.user.view.authentication.AuthWindow} if no
@@ -76,7 +76,7 @@ Ext.define("coon.user.app.PackageController", {
      *
      *@inheritdoc
      */
-    preLaunchHook : function (app) {
+    preLaunchHook: function (app) {
 
         if (!coon.user.Manager.getUser()) {
             this.createAuthWindow();
@@ -96,23 +96,23 @@ Ext.define("coon.user.app.PackageController", {
      *
      * @see coon.user.Manager#getUser
      */
-    postLaunchHook : function () {
+    postLaunchHook: function () {
 
         var user = coon.user.Manager.getUser();
 
         if (!user) {
             Ext.raise({
-                source : Ext.getClassName(this),
-                msg    : Ext.getClassName(this) + "#postLaunchHook requires a valid user"
+                source: Ext.getClassName(this),
+                msg: Ext.getClassName(this) + "#postLaunchHook requires a valid user"
             });
         }
 
         return {
-            permaNav : [{
-                xtype : "tbtext",
-                text  : user.get("username")
+            permaNav: [{
+                xtype: "tbtext",
+                text: user.get("username")
             }, {
-                xtype  : "cn_user-toolbaruserimageitem"
+                xtype: "cn_user-toolbaruserimageitem"
             }]
         };
     },
@@ -128,13 +128,13 @@ Ext.define("coon.user.app.PackageController", {
      *
      * @throws if user Model is not an instance of {@link onjoon.cn_user.model.UserModel}
      */
-    userAvailable : function (userModel) {
+    userAvailable: function (userModel) {
         var me = this;
 
         if (!(userModel instanceof coon.user.model.UserModel)) {
             Ext.raise({
-                source : Ext.getClassName(me),
-                msg    : "Method needs userModel to be instance of coon.user.model.UserModel"
+                source: Ext.getClassName(me),
+                msg: "Method needs userModel to be instance of coon.user.model.UserModel"
             });
         }
 
@@ -153,9 +153,9 @@ Ext.define("coon.user.app.PackageController", {
      *
      * @protected
      */
-    userWasNotAuthorized : Ext.emptyFn,
+    userWasNotAuthorized: Ext.emptyFn,
 
-    privates : {
+    privates: {
 
         /**
          * Creates and shows the {@link coon.user.view.authentication.AuthWindow}
@@ -163,15 +163,15 @@ Ext.define("coon.user.app.PackageController", {
          *
          * @return {coon.user.view.authentication.AuthWindow}
          */
-        createAuthWindow : function () {
+        createAuthWindow: function () {
 
             this.authWindow = Ext.create("coon.user.view.authentication.AuthWindow", {
-                listeners : {
-                    destroy : function () {
+                listeners: {
+                    destroy: function () {
                         this.authWindow = null;
                     },
-                    "cn_user-authrequest" : this.onAuthRequest,
-                    scope : this
+                    "cn_user-authrequest": this.onAuthRequest,
+                    scope: this
                 }
             });
 
@@ -185,7 +185,7 @@ Ext.define("coon.user.app.PackageController", {
          *
          * see {@link #userAvailable}
          */
-        onUserLoadSuccess : function (userModel) {
+        onUserLoadSuccess: function (userModel) {
             const me = this,
                 authWindow = me.authWindow;
 
@@ -202,7 +202,7 @@ Ext.define("coon.user.app.PackageController", {
          *
          * see {@link #userWasNotAuthorized}
          */
-        onUserLoadFailure : function (options) {
+        onUserLoadFailure: function (options) {
             const me = this,
                 authWindow = me.authWindow;
 
@@ -228,16 +228,16 @@ Ext.define("coon.user.app.PackageController", {
          * see {@link #onUserLoadSuccess}
          * see {@link #onUserLoadFailure}
          */
-        onAuthRequest : function (authForm, authInfo) {
+        onAuthRequest: function (authForm, authInfo) {
             var me = this;
 
             authForm.showAuthorizationBusy(true);
 
             coon.user.Manager.loadUser({
-                params  : authInfo,
-                success : me.onUserLoadSuccess,
-                failure : me.onUserLoadFailure,
-                scope   : me
+                params: authInfo,
+                success: me.onUserLoadSuccess,
+                failure: me.onUserLoadFailure,
+                scope: me
             });
         }
 

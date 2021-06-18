@@ -1,5 +1,6 @@
 /docs
 /build
-/tests/tests.config.js
-/tests/index.html
 /.idea
+/node_modules
+/tests.redirect.html
+/.extjs-link.conf.json

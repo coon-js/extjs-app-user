@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017-2021 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,9 +23,9 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe("coon.user.view.authentication.AuthWindowTest", function (t) {
+StartTest((t) => {
 
-    t.it("Should create and show the window", function (t) {
+    t.it("Should create and show the window", (t) => {
 
         var window = Ext.create("coon.user.view.authentication.AuthWindow");
 
@@ -46,12 +46,12 @@ describe("coon.user.view.authentication.AuthWindowTest", function (t) {
 
     });
 
-    t.it("Relay event cn_user-authrequest should work properly", function (t) {
+    t.it("Relay event cn_user-authrequest should work properly", (t) => {
 
         var window    = Ext.create("coon.user.view.authentication.AuthWindow"),
             form      = window.down("cn_user-authform"),
             evtForm, evtOptions,
-            params =  {foo : "bar"};
+            params =  {foo: "bar"};
 
         window.on("cn_user-authrequest", function (form, options) {
             evtForm    = form;

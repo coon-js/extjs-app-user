@@ -1,8 +1,7 @@
-<!--
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017-2021 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,21 +22,5 @@
  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
--->
 
-<!DOCTYPE html>
- <html>
-  <head>
-
-    <!-- Siesta CSS e.g. siesta-all.css-->
-    <link rel="stylesheet" type="text/css" href="[PATH_TO_SIESTA_ALL.CSS]">
-
-    <!-- Siesta application e.g. siesta-all.js -->
-    <script type="text/javascript" src="[PATH_TO_SIESTA_ALL.JS]"></script>
-
-    <!-- The test harness -->
-    <script type="text/javascript" src="tests.config.js"></script>
-    <script type="text/javascript" src="index.js"></script>
-  </head>
-  <body></body>
- </html>
+// intentionally left empty

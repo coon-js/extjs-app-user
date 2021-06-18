@@ -1,51 +1,95 @@
 {
-    "name": "lib-cn_user",
-
-    "sencha": {
-        "namespace": "coon.user",
-        "type": "code",
-        "creator": "coon.js",
-        "summary": "Application package for lib-cn_comp supported Sencha ExtJS applications providing user authentication views and flow.",
-        "detailedDescription": "Application package for lib-cn_comp supported Sencha ExtJS applications providing user authentication views and flow. Requires lib-cn_comp.",
-        "version": "1.0.0",
-        "compatVersion": "1.0.0",
-        "format": "1",
-        "slicer": null,
-        "output": {
-            "base": "${package.dir}/build/${build.id}",
-            "js": {
-                "version": "ES8"
-            }
-        },
-        "language": {
-            "js": {
-                "input": "ES8",
-                "output": "ES8"
-            }
-        },
-        "compressor": {
-            "type" : "closure",
-            "polyfills": "none"
-        },
-        "local": true,
-        "sass" : null,
-        "classpath": [
-            "${package.dir}/src",
-            "${package.dir}/${toolkit.name}/src"
-        ],
-        "overrides": null,
-        "example": null,
-        "framework": "ext",
-        "requires": [
-            "lib-cn_comp"
-        ],
-        "builds": {
-            "classic": {
-                "toolkit": "classic"
-            },
-            "modern": {
-                "toolkit": "modern"
-            }
-        }
-    }
+  "name": "@coon-js/extjs-app-user",
+  "sencha": {
+    "namespace": "coon.user",
+    "type": "code",
+    "creator": "coon.js",
+    "summary": "NPM package providing user authentication views and flows for application building.",
+    "detailedDescription": "Application package for extjs-lib-comp supported Sencha ExtJS applications providing user authentication views and flow. Requires extjs-lib-comp.",
+    "format": "1",
+    "slicer": null,
+    "output": {
+      "base": "${package.dir}/build/${build.id}",
+      "js": {
+        "version": "ES8"
+      }
+    },
+    "language": {
+      "js": {
+        "input": "ES8",
+        "output": "ES8"
+      }
+    },
+    "compressor": {
+      "type": "closure",
+      "polyfills": "none"
+    },
+    "local": true,
+    "sass": null,
+    "classpath": [
+      "${package.dir}/src",
+      "${package.dir}/${toolkit.name}/src"
+    ],
+    "overrides": null,
+    "example": null,
+    "framework": "ext",
+    "requires": [
+      "extjs-lib-comp"
+    ],
+    "builds": {
+      "classic": {
+        "toolkit": "classic"
+      },
+      "modern": {
+        "toolkit": "modern"
+      }
+    },
+    "version": "0.0.2",
+    "compatVersion": "0.0.2"
+  },
+  "description": "This NPM package for Sencha ExtJS applications package provides functionality for managing user authentication, defining `pre`- and `postLaunchHooks` for an [extjs-lib-comp](https://github.com/coon-js/extjs-lib-comp) application (`coon.comp.app.Application`) as well as required views.",
+  "version": "0.0.1",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "npx ws --port 8064 --static.index tests.redirect.html --open",
+    "postinstall": "npm run setup:tests",
+    "setup:tests": "npx extjs-link && siesta-lib-helper"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coon-js/extjs-app-user.git"
+  },
+  "keywords": [
+    "user",
+    "authentication",
+    "extjs",
+    "sencha",
+    "l8.js",
+    "l8js",
+    "l8",
+    "coon.js",
+    "coon-js",
+    "coonjs",
+    "view",
+    "component",
+    "extjs-lib-core"
+  ],
+  "author": "Thorsten Suckow-Homberg <thorsten@suckow-homberg.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/coon-js/extjs-app-user/issues"
+  },
+  "homepage": "https://github.com/coon-js/extjs-app-user#readme",
+  "devDependencies": {
+    "@coon-js/extjs-lib-core": "file:../extjs-lib-core",
+    "@coon-js/extjs-lib-comp": "file:../extjs-lib-comp",
+    "@coon-js/extjs-link": "file:../extjs-link",
+    "@coon-js/siesta-lib-helper": "file:../siesta-lib-helper",
+    "@l8js/l8": "file:../../@l8js/l8",
+    "local-web-server": "^4.2.1",
+    "siesta-lite": "^5.5.2"
+  }
 }

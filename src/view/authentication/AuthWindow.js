@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017-2021 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -43,7 +43,7 @@ Ext.define("coon.user.view.authentication.AuthWindow", {
         "coon.user.view.authentication.AuthForm"
     ],
 
-    defaultFocus : "cn_user-authform", // force focus on authform
+    defaultFocus: "cn_user-authform", // force focus on authform
 
     bodyCls: "cn_user-authwindow",
 
@@ -51,26 +51,26 @@ Ext.define("coon.user.view.authentication.AuthWindow", {
      * @type {String}
      * @i18n_text
      */
-    title : "Log in",
+    title: "Log in",
 
-    layout : {
-        type  : "vbox",
-        align : "center",
-        pack  : "center"
+    layout: {
+        type: "vbox",
+        align: "center",
+        pack: "center"
     },
 
-    items : [{
-        xtype : "cn_user-authform"
+    items: [{
+        xtype: "cn_user-authform"
     }],
 
-    listeners : Ext.isModern ? {initialize : "onWindowAfterRender"} : {afterrender : "onWindowAfterRender"},
+    listeners: Ext.isModern ? {initialize: "onWindowAfterRender"} : {afterrender: "onWindowAfterRender"},
 
-    privates : {
+    privates: {
 
         /**
          * @private
          */
-        onWindowAfterRender : function () {
+        onWindowAfterRender: function () {
             var me = this;
 
             // Relay events from the AuthForm

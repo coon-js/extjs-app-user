@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -27,7 +27,7 @@
  * Class for managing an application user.
  * This is a singleton class which can be configured by providing custom
  * implementations of {@link coon.user.UserProvider}. It till be used
- * throughout the lib-cn_user package to manage a single application user.
+ * throughout the extjs-app-user package to manage a single application user.
  * Note: This class' intention is not to manage a list of user. It's use case is
  * to solely provide tools to manage a user who is using the application.
  *
@@ -61,9 +61,9 @@
  */
 Ext.define("coon.user.Manager", {
 
-    singleton : true,
+    singleton: true,
 
-    requires : [
+    requires: [
         "coon.user.DefaultUserProvider"
     ],
 
@@ -77,13 +77,13 @@ Ext.define("coon.user.Manager", {
      * The class which is used as the UserProvider needs to be loaded before
      * it is used with the Manager.
      */
-    providerConfig : "coon.user.DefaultUserProvider",
+    providerConfig: "coon.user.DefaultUserProvider",
 
     /**
      * @type {coon.user.UserProvider} userProvider
      * @private
      */
-    userProvider : null,
+    userProvider: null,
 
     /**
      * Loads a user based on the information specified in options.params.
@@ -106,7 +106,7 @@ Ext.define("coon.user.Manager", {
      * load operation; see {@link coon.user.UserProvider#isUserLoading},
      * or if success- or callback-properties are specified, but not valid functions.
      */
-    loadUser : function (options) {
+    loadUser: function (options) {
 
         var me       = this,
             provider = me.getUserProvider(),
@@ -115,29 +115,29 @@ Ext.define("coon.user.Manager", {
 
         if (provider.isUserLoading()) {
             Ext.raise({
-                sourceClass : Ext.getClassName(me),
+                sourceClass: Ext.getClassName(me),
                 // set this to true in any case to prevent
                 // misbehavior due to async race conditions
-                isLoading : true,
-                msg : Ext.getClassName(me) + "#userProvider is already loading an user."
+                isLoading: true,
+                msg: Ext.getClassName(me) + "#userProvider is already loading an user."
             });
         }
 
         cfg = options ? options.params || {} : {};
 
         cbOptions = Ext.apply({
-            scope   : null,
-            success : Ext.emptyFn,
-            failure : Ext.emptyFn
+            scope: null,
+            success: Ext.emptyFn,
+            failure: Ext.emptyFn
         }, options || {});
 
         if ((cbOptions.success && !Ext.isFunction(cbOptions.success)) ||
             (cbOptions.failure && !Ext.isFunction(cbOptions.failure))) {
             Ext.raise({
-                sourceClass : Ext.getClassName(me),
-                success     : cbOptions.success,
-                failure     : cbOptions.failure,
-                msg         : Ext.getClassName(me) + "#loadUser expects success and failure to be valid callback functions."
+                sourceClass: Ext.getClassName(me),
+                success: cbOptions.success,
+                failure: cbOptions.failure,
+                msg: Ext.getClassName(me) + "#loadUser expects success and failure to be valid callback functions."
             });
 
         }
@@ -148,14 +148,14 @@ Ext.define("coon.user.Manager", {
             "cn_user-userload",
             me.onUserProviderLoad,
             me,
-            {single : true}
+            {single: true}
         );
 
         provider.on(
             "cn_user-userloadfailure",
             me.onUserProviderLoadFailure,
             me,
-            {single : true}
+            {single: true}
         );
 
         provider.loadUser(cfg);
@@ -173,7 +173,7 @@ Ext.define("coon.user.Manager", {
      *
      * @returns {coon.user.model.UserModel|null}
      */
-    getUser : function () {
+    getUser: function () {
         return this.getUserProvider().getUser();
     },
 
@@ -186,7 +186,7 @@ Ext.define("coon.user.Manager", {
      *
      * see {@link #setUserProvider}
      */
-    getUserProvider : function () {
+    getUserProvider: function () {
 
         if (!this.userProvider) {
             this.userProvider = this.setUserProvider(this.providerConfig);
@@ -219,7 +219,7 @@ Ext.define("coon.user.Manager", {
      *
      * see {@link #initUserProvider}
      */
-    setUserProvider : function (providerConfig) {
+    setUserProvider: function (providerConfig) {
 
         if (this.userProvider) {
             this.removeUserProviderListeners(this.userProvider);
@@ -229,13 +229,13 @@ Ext.define("coon.user.Manager", {
         return this.userProvider;
     },
 
-    privates : {
+    privates: {
 
         /**
          * @type {Object}  callbackOptions
          * @param private
          */
-        callbackOptions : null,
+        callbackOptions: null,
 
         /**
          * Removes any listeners attached to the {@link #userProvider} by this Manager.
@@ -245,7 +245,7 @@ Ext.define("coon.user.Manager", {
          *
          * @private
          */
-        removeUserProviderListeners : function (userProvider) {
+        removeUserProviderListeners: function (userProvider) {
 
             var me = this;
 
@@ -274,7 +274,7 @@ Ext.define("coon.user.Manager", {
          *
          * @private
          */
-        onUserProviderLoad : function (provider, userModel) {
+        onUserProviderLoad: function (provider, userModel) {
 
             var me              = this,
                 callbackOptions = me.callbackOptions;
@@ -295,7 +295,7 @@ Ext.define("coon.user.Manager", {
          *
          * @private
          */
-        onUserProviderLoadFailure : function (provider, options) {
+        onUserProviderLoadFailure: function (provider, options) {
 
             var me              = this,
                 callbackOptions = me.callbackOptions;
@@ -318,7 +318,7 @@ Ext.define("coon.user.Manager", {
          * @throws error if the className computed by using the providerConfig argument
          * failed to load, or if the class was not already loaded.
          */
-        initUserProvider : function (providerConfig) {
+        initUserProvider: function (providerConfig) {
 
             if (providerConfig instanceof coon.user.UserProvider) {
                 return providerConfig;
@@ -334,18 +334,18 @@ Ext.define("coon.user.Manager", {
 
             if (!className) {
                 Ext.raise({
-                    sourceClass    : Ext.getClassName(this),
-                    providerConfig : providerConfig,
-                    msg            : Ext.getClassName(this) + " needs providerConfig to be configured as fqn or an object with a \"cnclass\"-property providing the fqn."
+                    sourceClass: Ext.getClassName(this),
+                    providerConfig: providerConfig,
+                    msg: Ext.getClassName(this) + " needs providerConfig to be configured as fqn or an object with a \"cnclass\"-property providing the fqn."
                 });
 
             }
 
             if (!Ext.ClassManager.get(className)) {
                 Ext.raise({
-                    sourceClass : Ext.getClassName(this),
-                    className   : className,
-                    msg         : Ext.getClassName(this) + " requires the class specified with providerConfig-argument to be loaded."
+                    sourceClass: Ext.getClassName(this),
+                    className: className,
+                    msg: Ext.getClassName(this) + " requires the class specified with providerConfig-argument to be loaded."
                 });
             }
 
@@ -359,9 +359,9 @@ Ext.define("coon.user.Manager", {
 
             if (!(ret instanceof coon.user.UserProvider)) {
                 Ext.raise({
-                    sourceClass   : Ext.getClassName(this),
-                    providerClass : ret,
-                    msg           : Ext.getClassName(this) + " providerConfig to represent an instance of coon.user.UserProvider."
+                    sourceClass: Ext.getClassName(this),
+                    providerClass: ret,
+                    msg: Ext.getClassName(this) + " providerConfig to represent an instance of coon.user.UserProvider."
                 });
             }
 

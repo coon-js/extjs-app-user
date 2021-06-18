@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -34,8 +34,8 @@
 Ext.define("coon.user.UserProvider", {
 
 
-    mixins : {
-        observable : "Ext.util.Observable"
+    mixins: {
+        observable: "Ext.util.Observable"
     },
 
     /**
@@ -60,13 +60,13 @@ Ext.define("coon.user.UserProvider", {
      * available by this provider.
      * @protected
      */
-    user : null,
+    user: null,
 
     /**
      * Creates a new instance of this USerProvider-class.
      * @param {Object} config
      */
-    constructor : function (config) {
+    constructor: function (config) {
 
         var me = this;
 
@@ -90,7 +90,7 @@ Ext.define("coon.user.UserProvider", {
      * @template
      *
      */
-    loadUser : Ext.emptyFn,
+    loadUser: Ext.emptyFn,
 
     /**
      * Returns true if there is currently a user-load operation ongoing,
@@ -102,7 +102,7 @@ Ext.define("coon.user.UserProvider", {
      *
      * @template
      */
-    isUserLoading : Ext.emptyFn,
+    isUserLoading: Ext.emptyFn,
 
     /**
      * Returns the current user loaded with this provider, if any.
@@ -111,7 +111,7 @@ Ext.define("coon.user.UserProvider", {
      *
      * see {@link #user}
      */
-    getUser : function () {
+    getUser: function () {
         return this.user;
     }
 

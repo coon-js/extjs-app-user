@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,12 +23,12 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe("coon.user.view.authentication.AuthFormTest", function (t) {
+StartTest((t) => {
 
     var form,
         createForm = function () {
             form = Ext.create("coon.user.view.authentication.AuthForm", {
-                renderTo : document.body
+                renderTo: document.body
             });
 
             return form;
@@ -44,9 +44,9 @@ describe("coon.user.view.authentication.AuthFormTest", function (t) {
     });
 
 
-    t.it("Should create and show the form", function (t) {
+    t.it("Should create and show the form", (t) => {
 
-        var form = createForm();
+        form = createForm();
         t.expect(form instanceof coon.comp.form.AutoCompleteForm).toBeTruthy();
 
         t.expect(form.autoCompleteTrigger).toBeDefined();
@@ -61,13 +61,13 @@ describe("coon.user.view.authentication.AuthFormTest", function (t) {
 
     });
 
-    t.it("Should focus the userid field", function (t) {
-        var form = createForm();
+    t.it("Should focus the userid field", (t) => {
+        form = createForm();
         form.focus();
         t.expect(document.activeElement).toBe(form.down("textfield[name=userid]").inputEl.dom);
     });
 
-    t.it("Should require userid", function (t) {
+    t.it("Should require userid", (t) => {
 
         var form = createForm();
         form.down("textfield[name=password]").setValue("abc");
@@ -75,14 +75,15 @@ describe("coon.user.view.authentication.AuthFormTest", function (t) {
         t.expect(form.down("button[reference=loginButton]").isDisabled()).toBeTruthy();
     });
 
-    t.it("Should require password", function (t) {
+
+    t.it("Should require password", (t) => {
         var form = createForm();
         form.down("textfield[name=userid]").setValue("abc");
         t.expect(form.isValid()).toBeFalsy();
         t.expect(form.down("button[reference=loginButton]").isDisabled()).toBeTruthy();
     });
 
-    t.it("Should be valid if both fields are set", function (t) {
+    t.it("Should be valid if both fields are set", (t) => {
         var form = createForm();
         form.down("textfield[name=userid]").setValue("abc");
         form.down("textfield[name=password]").setValue("abc");
@@ -95,7 +96,7 @@ describe("coon.user.view.authentication.AuthFormTest", function (t) {
     });
 
 
-    t.it("Form submit should trigger cn_user-authrequest event", function (t) {
+    t.it("Form submit should trigger cn_user-authrequest event", (t) => {
 
         var form   = createForm(),
             signal = undefined,
@@ -113,8 +114,8 @@ describe("coon.user.view.authentication.AuthFormTest", function (t) {
             t.click(form.down("button[reference=loginButton]"), function () {
                 t.expect(signaledForm).toBe(form);
                 t.expect(signal).toEqual({
-                    userid   : "useridValue",
-                    password : "passwordValue"
+                    userid: "useridValue",
+                    password: "passwordValue"
                 });
             });
 
@@ -122,7 +123,7 @@ describe("coon.user.view.authentication.AuthFormTest", function (t) {
 
     });
 
-    t.it("Enter key should trigger form submit", function (t) {
+    t.it("Enter key should trigger form submit", (t) => {
 
         var form   = createForm(),
             signal = undefined;
@@ -137,8 +138,8 @@ describe("coon.user.view.authentication.AuthFormTest", function (t) {
         t.waitForMs(600, function (){
             t.keyPress(form.down("textfield[name=password]"), "[RETURN]", undefined, function () {
                 t.expect(signal).toEqual({
-                    userid   : "useridValue1",
-                    password : "passwordValue1"
+                    userid: "useridValue1",
+                    password: "passwordValue1"
                 });
 
             });
@@ -146,7 +147,7 @@ describe("coon.user.view.authentication.AuthFormTest", function (t) {
         });
     });
 
-    t.it("Should show that authorization failed", function (t) {
+    t.it("Should show that authorization failed", (t) => {
 
         var form  = createForm(),
             label = form.lookupReference("authFailedLabel"),
@@ -166,7 +167,7 @@ describe("coon.user.view.authentication.AuthFormTest", function (t) {
         t.expect(label.isVisible()).toBe(false);
     });
 
-    t.it("Should hide authorization failed if a new login attempt is made", function (t) {
+    t.it("Should hide authorization failed if a new login attempt is made", (t) => {
 
         var form  = createForm(),
             label = form.lookupReference("authFailedLabel");
@@ -188,7 +189,7 @@ describe("coon.user.view.authentication.AuthFormTest", function (t) {
     });
 
 
-    t.it("Should show that the form is busy sending an auth request", function (t) {
+    t.it("Should show that the form is busy sending an auth request", (t) => {
 
         var form          = createForm(),
             useridField   = form.down("textfield[name=userid]"),

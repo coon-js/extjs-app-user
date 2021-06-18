@@ -4,7 +4,9 @@
         "es6": true
     },
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+
     },
     "extends": "eslint:recommended",
     "globals": {
@@ -16,16 +18,17 @@
         "Siesta": true,
         "location": true,
         "describe" : true,
-        "AbstractTestClass" : true,
         "Class" : true,
         "StartTest" : true,
-        "Fashion" : true
+        "Fashion" : true,
+        "l8": true
     },
     "ignorePatterns" : [
         "bootstrap.js",
         "**/build/*"
     ],
     "rules": {
+        "key-spacing" : ["error", {"mode" :  "strict"}],
         "indent": ["error"],
         "linebreak-style": ["error", "unix"],
         "quotes": ["error", "double"],
