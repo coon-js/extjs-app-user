@@ -1,6 +1,7 @@
 {
   "name": "@coon-js/extjs-app-user",
   "sencha": {
+    "name": "extjs-app-user",
     "namespace": "coon.user",
     "type": "code",
     "creator": "coon.js",
@@ -54,9 +55,11 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "npx ws --port 8064 --static.index tests.redirect.html --open",
-    "postinstall": "npm run setup:tests && node-git-hooks",
-    "setup:tests": "npx extjs-link && siesta-lib-helper"
+    "build:dev": "npm run build:deps && npm run build:test && npx node-git-hooks",
+    "build:deps": "npm explore @coon-js/siesta-lib-helper npm run build:dev",
+    "build:test": "npx extjs-link && npx siesta-lib-helper",
+    "postversion": "git push && git push --tags",
+    "test": "npx ws --port 8064 --static.index tests.redirect.html --open"
   },
   "repository": {
     "type": "git",
@@ -83,12 +86,14 @@
     "url": "https://github.com/coon-js/extjs-app-user/issues"
   },
   "homepage": "https://github.com/coon-js/extjs-app-user#readme",
+  "dependencies": {
+    "@coon-js/extjs-lib-comp": "^0.1.0",
+    "@coon-js/extjs-lib-core": "^0.6.0",
+    "@l8js/l8": "^0.3.9"
+  },
   "devDependencies": {
-    "@coon-js/extjs-lib-comp": "file:../extjs-lib-comp",
-    "@coon-js/extjs-lib-core": "file:../extjs-lib-core",
-    "@coon-js/extjs-link": "file:../extjs-link",
-    "@coon-js/siesta-lib-helper": "file:../siesta-lib-helper",
-    "@l8js/l8": "file:../../@l8js/l8",
+    "@coon-js/extjs-link": "^0.1.4",
+    "@coon-js/siesta-lib-helper": "^0.1.9",
     "eslint": "^7.28.0",
     "local-web-server": "^4.2.1",
     "node-git-hooks": "^1.0.6",
