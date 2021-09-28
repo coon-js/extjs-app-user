@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -39,16 +39,16 @@
 Ext.define("coon.user.Util", {
 
 
-    requires : [
+    requires: [
         "coon.user.model.UserModel"
     ],
 
-    singleton : true,
+    singleton: true,
 
     /**
      * @static
      */
-    BASIC_AUTH : 1,
+    BASIC_AUTH: 1,
 
     /**
      * Returns a base64 encoded string containign username/password for the use with
@@ -78,14 +78,14 @@ Ext.define("coon.user.Util", {
      * @throws if userModel is not an instance of {coon.user.model.UserModel} or if no valid
      * format was specified
      */
-    userToCredentials : function (userModel, format) {
+    userToCredentials: function (userModel, format) {
 
         const me = this;
 
         if (!(userModel instanceof coon.user.model.UserModel)) {
             Ext.raise({
-                msg : "\"userModel\" must be an instance of coon.user.model.UserModel",
-                userModel : userModel
+                msg: "\"userModel\" must be an instance of coon.user.model.UserModel",
+                userModel: userModel
             });
         }
 
@@ -95,8 +95,8 @@ Ext.define("coon.user.Util", {
 
         default:
             Ext.raise({
-                msg : "no valid value for \"format\" specified",
-                format : format
+                msg: "no valid value for \"format\" specified",
+                format: format
             });
         }
 

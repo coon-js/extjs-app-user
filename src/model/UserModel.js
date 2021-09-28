@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -24,7 +24,7 @@
  */
 
 /**
- * Base model for lib-cn_core representing an Aplication-User who is able
+ * Base model for extjs-lib-core representing an Aplication-User who is able
  * to sign into parts of the application.
  * The following fields are available:
  *
@@ -42,67 +42,67 @@
  */
 Ext.define("coon.user.model.UserModel", {
 
-    extend : "coon.core.data.BaseModel",
+    extend: "coon.core.data.BaseModel",
 
-    requires : [
+    requires: [
         "coon.user.data.user.BaseSchema"
     ],
 
-    schema : "cn_user-datauserbaseschema",
+    schema: "cn_user-datauserbaseschema",
 
-    fields : [{
+    fields: [{
         // firstname
-        name : "firstname",
-        type : "string",
-        validators : [{
-            type : "presence"
+        name: "firstname",
+        type: "string",
+        validators: [{
+            type: "presence"
         }]
     }, {
         // lastname
-        name : "lastname",
-        type : "string",
-        validators : [{
-            type : "presence"
+        name: "lastname",
+        type: "string",
+        validators: [{
+            type: "presence"
         }]
     }, {
         // username
-        name : "username",
-        type : "string",
-        validators : [{
-            type : "exclusion",
-            list : ["admin", "administrator", "user"]
+        name: "username",
+        type: "string",
+        validators: [{
+            type: "exclusion",
+            list: ["admin", "administrator", "user"]
         }, {
-            type : "presence"
+            type: "presence"
         }, {
-            type : "length",
-            min  : 3
+            type: "length",
+            min: 3
         }]
     }, {
         // emailAddress
-        name       : "emailAddress",
-        type       : "string",
-        validators : [{
-            type : "presence"
+        name: "emailAddress",
+        type: "string",
+        validators: [{
+            type: "presence"
         }, {
-            type : "email"
+            type: "email"
         }]
     }, {
         // isRoot
-        name       : "isRoot",
-        type       : "boolean"
+        name: "isRoot",
+        type: "boolean"
     }, {
         // lastLogin
-        name       : "lastLogin",
-        type       : "date",
-        dateFormat : "timestamp",
-        persist    : false
+        name: "lastLogin",
+        type: "date",
+        dateFormat: "timestamp",
+        persist: false
     },{
         // password
-        name         : "password",
-        defaultValue : "" ,
-        validators : [{
-            type : "exclusion",
-            list : ["password", "1234", "test"]
+        name: "password",
+        defaultValue: "" ,
+        validators: [{
+            type: "exclusion",
+            list: ["password", "1234", "test"]
         }]
     }]
 

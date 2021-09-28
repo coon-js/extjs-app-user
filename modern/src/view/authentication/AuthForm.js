@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017-2021 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -64,93 +64,93 @@ Ext.define("coon.user.view.authentication.AuthForm", {
      * @param {String} authinfo.password The password submitted
      */
 
-    formName : "authForm",
+    formName: "authForm",
 
-    autoCompleteTrigger : {
-        reference : "loginButton"
+    autoCompleteTrigger: {
+        reference: "loginButton"
     },
 
-    bodyPadding : "20 20",
+    bodyPadding: "20 20",
 
-    cls : "cn_user-authform",
+    cls: "cn_user-authform",
 
-    header : false,
+    header: false,
 
-    width : 415,
+    width: 415,
 
-    loginButtonIconCls : "x-fa fa-angle-right",
+    loginButtonIconCls: "x-fa fa-angle-right",
 
-    loginButtonIconClsBusy : "x-fa fa-spinner fa-spin",
+    loginButtonIconClsBusy: "x-fa fa-spinner fa-spin",
 
-    layout : {
+    layout: {
         type: "vbox",
         align: "stretch"
     },
 
-    defaults : {
-        margin : "5 0"
+    defaults: {
+        margin: "5 0"
     },
 
     // this form defines a ViewModel
     // to automatically keep track of userfield/passwordfield
     // and whether the login-button should be rendered as
     // enabled/disabled
-    viewModel : true,
+    viewModel: true,
 
     items: [{
-        xtype : "label",
-        cls   : "head-label",
+        xtype: "label",
+        cls: "head-label",
         /**
          * @i18n_text
          */
-        text  : "Sign in"
+        text: "Sign in"
     }, {
-        xtype       : "textfield",
-        name        : "userid",
-        required    : true,
-        reference   : "cn_user_useridField",
+        xtype: "textfield",
+        name: "userid",
+        required: true,
+        reference: "cn_user_useridField",
         /**
          * @i18n_text
          */
-        placeholder : "user id"
+        placeholder: "user id"
     }, {
-        margin      : "24 0 0 0",
-        xtype       : "textfield",
-        reference   : "cn_user_passwordField",
+        margin: "24 0 0 0",
+        xtype: "textfield",
+        reference: "cn_user_passwordField",
         /**
          * @i18n_text
          */
-        placeholder : "password",
-        inputType   : "password",
-        name        : "password",
-        required    : true
+        placeholder: "password",
+        inputType: "password",
+        name: "password",
+        required: true
     }, {
-        margin      : "24 0 0 0",
-        xtype      : "button",
-        reference  : "loginButton",
-        disabled   : true,
-        bind       : {
-            disabled : "{!cn_user_useridField.value || !cn_user_passwordField.value}"
+        margin: "24 0 0 0",
+        xtype: "button",
+        reference: "loginButton",
+        disabled: true,
+        bind: {
+            disabled: "{!cn_user_useridField.value || !cn_user_passwordField.value}"
         },
         /**
          * @i18n_text
          */
-        text       : "Login"
+        text: "Login"
     }, {
-        xtype     : "displayfield",
-        hidden    : true,
-        reference : "authFailedLabel",
+        xtype: "displayfield",
+        hidden: true,
+        reference: "authFailedLabel",
         /**
          * @i18n_text
          */
-        value : "Authorization failed. Please try again."
+        value: "Authorization failed. Please try again."
     }],
 
 
     /**
      * @inheritdoc
      */
-    initialize : function () {
+    initialize: function () {
 
         const me     = this,
             keyMap = {};
@@ -165,7 +165,7 @@ Ext.define("coon.user.view.authentication.AuthForm", {
         // install listeners for the loginbutton and ENTER-Key for textfields
         me.down("button[reference=loginButton]").on("tap", me.requestSubmit, me);
 
-        keyMap[Ext.event.Event.ENTER] = {fn : me.requestSubmit, scope : me};
+        keyMap[Ext.event.Event.ENTER] = {fn: me.requestSubmit, scope: me};
         me.down("textfield[reference=cn_user_useridField]").setKeyMap(keyMap);
         me.down("textfield[reference=cn_user_passwordField]").setKeyMap(keyMap);
 
@@ -183,7 +183,7 @@ Ext.define("coon.user.view.authentication.AuthForm", {
      *
      * @return this
      */
-    showAuthorizationBusy : function (show) {
+    showAuthorizationBusy: function (show) {
 
         var me            = this,
             useridField   = me.down("textfield[name=userid]"),
@@ -216,7 +216,7 @@ Ext.define("coon.user.view.authentication.AuthForm", {
      *
      * @return this
      */
-    showAuthorizationFailed : function (show) {
+    showAuthorizationFailed: function (show) {
 
         var me    = this,
             label = me.lookupReference("authFailedLabel");
@@ -227,12 +227,12 @@ Ext.define("coon.user.view.authentication.AuthForm", {
     },
 
 
-    privates : {
+    privates: {
 
         /**
          * Click / ENTER-Key handler for fields and login-button
          */
-        requestSubmit : function () {
+        requestSubmit: function () {
 
             const me        = this,
                 userid    = me.down("textfield[name=userid]").getValue(),
@@ -242,8 +242,8 @@ Ext.define("coon.user.view.authentication.AuthForm", {
             me.showAuthorizationFailed(false);
 
             me.fireEvent("cn_user-authrequest", me, {
-                userid   : userid,
-                password : password
+                userid: userid,
+                password: password
             });
         }
 

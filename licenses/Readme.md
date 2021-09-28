@@ -1,3 +1,3 @@
-# lib-cn_user/licenses
+# extjs-app-user/licenses
 
 This folder contains the supported licenses for third-party use.

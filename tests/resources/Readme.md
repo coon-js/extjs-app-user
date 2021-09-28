@@ -1,3 +1,3 @@
-# lib-cn_user/tests/resources
+# extjs-app-user/tests/resources
 
 This folder contains static resources for tests.

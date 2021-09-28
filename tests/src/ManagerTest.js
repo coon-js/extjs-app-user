@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,7 +23,7 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe("coon.user.ManagerTest", function (t) {
+StartTest((t) => {
 
     var checkListenerAvailableHelper = function (t, provider) {
         t.expect(provider.hasListener("cn_user-userload")).toBeTruthy();
@@ -40,7 +40,7 @@ describe("coon.user.ManagerTest", function (t) {
     t.requireOk("coon.user.Manager", function () {
 
 
-        t.it("Should be available", function (t) {
+        t.it("Should be available", (t) => {
 
             t.expect(coon.user.Manager).toBeDefined();
         });
@@ -48,7 +48,7 @@ describe("coon.user.ManagerTest", function (t) {
         /**
          * Okay Tests
          */
-        t.it("setUserProvider with valid class name", function (t) {
+        t.it("setUserProvider with valid class name", (t) => {
             var provider = coon.user.Manager.setUserProvider(
                 "coon.user.DefaultUserProvider"
             );
@@ -56,7 +56,7 @@ describe("coon.user.ManagerTest", function (t) {
             t.expect(provider instanceof coon.user.DefaultUserProvider).toBeTruthy();
             t.expect(coon.user.Manager.getUserProvider()).toBe(provider);
         });
-        t.it("setUserProvider with valid existing instance", function (t) {
+        t.it("setUserProvider with valid existing instance", (t) => {
 
             var cfgProvider = Ext.create("coon.user.DefaultUserProvider"),
                 provider;
@@ -66,11 +66,11 @@ describe("coon.user.ManagerTest", function (t) {
             t.expect(provider).toBe(cfgProvider);
             t.expect(coon.user.Manager.getUserProvider()).toBe(provider);
         });
-        t.it("setUserProvider with valid config object", function (t) {
+        t.it("setUserProvider with valid config object", (t) => {
             var provider = coon.user.Manager.setUserProvider({
-                cnclass : "coon.user.DefaultUserProvider",
-                opt1    : "foo",
-                opt2    : "bar"
+                cnclass: "coon.user.DefaultUserProvider",
+                opt1: "foo",
+                opt2: "bar"
             });
 
             t.expect(provider instanceof coon.user.DefaultUserProvider).toBeTruthy();
@@ -82,7 +82,7 @@ describe("coon.user.ManagerTest", function (t) {
         /**
          * Tests for exceptions
          */
-        t.it("setUserProvider with class not loaded yet", function (t) {
+        t.it("setUserProvider with class not loaded yet", (t) => {
 
             var exc, provider;
 
@@ -98,14 +98,14 @@ describe("coon.user.ManagerTest", function (t) {
             t.expect(exc).toBeDefined();
             t.expect(exc.msg).toBeDefined();
         });
-        t.it("setUserProvider with config object and not yet loaded class", function (t) {
+        t.it("setUserProvider with config object and not yet loaded class", (t) => {
             var exc, provider;
 
             try {
                 provider = coon.user.Manager.setUserProvider({
-                    cnclass : "coon.user.DefaultUserProviderStuff",
-                    opt1    : "foo",
-                    opt2    : "bar"
+                    cnclass: "coon.user.DefaultUserProviderStuff",
+                    opt1: "foo",
+                    opt2: "bar"
                 });
             } catch (e) {
                 exc = e;
@@ -115,13 +115,13 @@ describe("coon.user.ManagerTest", function (t) {
             t.expect(exc).toBeDefined();
             t.expect(exc.msg).toBeDefined();
         });
-        t.it("setUserProvider with config object and missing cnclass", function (t) {
+        t.it("setUserProvider with config object and missing cnclass", (t) => {
             var exc, provider;
 
             try {
                 provider = coon.user.Manager.setUserProvider({
-                    opt1    : "foo",
-                    opt2    : "bar"
+                    opt1: "foo",
+                    opt2: "bar"
                 });
             } catch (e) {
                 exc = e;
@@ -131,7 +131,7 @@ describe("coon.user.ManagerTest", function (t) {
             t.expect(exc).toBeDefined();
             t.expect(exc.msg).toBeDefined();
         });
-        t.it("Should throw exception if passed argument is instance, but not instance of coon.user.UserProvider", function (t) {
+        t.it("Should throw exception if passed argument is instance, but not instance of coon.user.UserProvider", (t) => {
             var exc;
 
             t.expect(Ext.Panel).toBeDefined();
@@ -145,7 +145,7 @@ describe("coon.user.ManagerTest", function (t) {
             t.expect(exc).toBeDefined();
             t.expect(exc.msg).toBeDefined();
         });
-        t.it("Should throw exception if passed argument is string, but resulting instance not instance of coon.user.UserProvider", function (t) {
+        t.it("Should throw exception if passed argument is string, but resulting instance not instance of coon.user.UserProvider", (t) => {
             var exc;
 
             t.expect(Ext.Panel).toBeDefined();
@@ -159,14 +159,14 @@ describe("coon.user.ManagerTest", function (t) {
             t.expect(exc).toBeDefined();
             t.expect(exc.msg).toBeDefined();
         });
-        t.it("Should throw exception if passed argument is object, but resulting instance not instance of coon.user.UserProvider", function (t) {
+        t.it("Should throw exception if passed argument is object, but resulting instance not instance of coon.user.UserProvider", (t) => {
             var exc;
 
             t.expect(Ext.Panel).toBeDefined();
 
             try {
                 coon.user.Manager.setUserProvider({
-                    cnclass : "Ext.Panel"
+                    cnclass: "Ext.Panel"
                 });
             } catch (e) {
                 exc = e;
@@ -215,16 +215,16 @@ describe("coon.user.ManagerTest", function (t) {
             t.expect(scopeMatch).toBeUndefined();
 
             coon.user.Manager.loadUser({
-                params  : {
-                    foo : "bar"
+                params: {
+                    foo: "bar"
                 },
-                success : function (model){
+                success: function (model){
                     this.wasSuccess = 1;
                     this.loadedModel = model;
                     scopeMatch = this === testBar;
                 },
-                failure : function (){this.wasFailure = 1;},
-                scope   : testBar
+                failure: function (){this.wasFailure = 1;},
+                scope: testBar
             });
 
             checkNoListenerAvailableHelper(t, provider);
@@ -243,8 +243,8 @@ describe("coon.user.ManagerTest", function (t) {
 
             var provider = coon.user.Manager.getUserProvider(),
                 params   = {
-                    foo        : "bar",
-                    forceFail  : true
+                    foo: "bar",
+                    forceFail: true
                 },
                 testBar = new (function TestBar () {
                     this.wasSuccess  = 0;
@@ -258,17 +258,17 @@ describe("coon.user.ManagerTest", function (t) {
             t.expect(scopeMatch).toBeUndefined();
 
             coon.user.Manager.loadUser({
-                params  : params,
-                success : function (model){
+                params: params,
+                success: function (model){
                     this.wasSuccess = 1;
                     this.loadedModel = model;
                 },
-                failure : function (options){
+                failure: function (options){
                     this.wasFailure = 1;
                     this.evtOptions = options;
                     scopeMatch = this === testBar;
                 },
-                scope   : testBar
+                scope: testBar
             });
 
             checkNoListenerAvailableHelper(t, provider);
@@ -293,8 +293,8 @@ describe("coon.user.ManagerTest", function (t) {
 
             try {
                 coon.user.Manager.loadUser({
-                    success : "bla",
-                    failure : Ext.emptyFn
+                    success: "bla",
+                    failure: Ext.emptyFn
                 });
             } catch (e) {
                 exc = e;
@@ -311,8 +311,8 @@ describe("coon.user.ManagerTest", function (t) {
 
             try {
                 coon.user.Manager.loadUser({
-                    success : function (){},
-                    failure : "bla"
+                    success: function (){},
+                    failure: "bla"
                 });
             } catch (e) {
                 exc = e;
@@ -323,7 +323,7 @@ describe("coon.user.ManagerTest", function (t) {
 
         });
 
-        t.it("setUserProvider and check if existing listener of coon.user.Manager get removed", function (t) {
+        t.it("setUserProvider and check if existing listener of coon.user.Manager get removed", (t) => {
 
             var provider = coon.user.Manager.setUserProvider(
                 "coon.user.DefaultUserProvider"

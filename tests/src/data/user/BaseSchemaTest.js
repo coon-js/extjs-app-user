@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,9 +23,9 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe("coon.user.data.user.BaseSchemaTest", function (t) {
+StartTest((t) => {
 
-    t.it("Should properly create the schema and check for default config", function (t) {
+    t.it("Should properly create the schema and check for default config", (t) => {
 
         var schema = Ext.create("coon.user.data.user.BaseSchema");
 

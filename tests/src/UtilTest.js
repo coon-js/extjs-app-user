@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,13 +23,13 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-describe("coon.user.UtilTest", function (t) {
+StartTest((t) => {
 
     t.requireOk("coon.user.Util", function () {
 
         // Run this test first to make sure it's not accidently fixed by loading
         // requirements during other tests
-        t.it("lib-cn_user#5", function (t) {
+        t.it("extjs-app-user#5", (t) => {
 
             let exc;
             try {
@@ -42,11 +42,11 @@ describe("coon.user.UtilTest", function (t) {
         });
 
 
-        t.it("userToCredentials()", function (t) {
+        t.it("userToCredentials()", (t) => {
 
             const userModel = Ext.create("coon.user.model.UserModel", {
-                username : "user",
-                password : "test"
+                username: "user",
+                password: "test"
             });
 
             let exc, encoded;

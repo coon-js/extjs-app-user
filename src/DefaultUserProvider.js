@@ -1,7 +1,7 @@
 /**
  * coon.js
- * lib-cn_user
- * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/lib-cn_user
+ * extjs-app-user
+ * Copyright (C) 2017 - 2020 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -48,9 +48,9 @@
  */
 Ext.define("coon.user.DefaultUserProvider", {
 
-    extend : "coon.user.UserProvider",
+    extend: "coon.user.UserProvider",
 
-    isLoading : false,
+    isLoading: false,
 
     /**
      * @inheritdoc
@@ -59,7 +59,7 @@ Ext.define("coon.user.DefaultUserProvider", {
      * @param {Boolean} options.forceFail true to trigger the {@link #cn_user-userloadfailure}-event
      *
      */
-    loadUser : function (options) {
+    loadUser: function (options) {
 
         this.isLoading = true;
 
@@ -71,18 +71,18 @@ Ext.define("coon.user.DefaultUserProvider", {
         }
 
         this.user = Ext.create("coon.user.model.UserModel", {
-            id           : 999999,
-            firstname    : "David",
-            lastname     : "Gardner",
-            username     : "dgardner",
-            emailAddress : "david.gardner@menzies-elementary-school.edu"
+            id: 999999,
+            firstname: "David",
+            lastname: "Gardner",
+            username: "dgardner",
+            emailAddress: "david.gardner@menzies-elementary-school.edu"
         });
         this.fireEvent("cn_user-userload", this, this.user);
         this.isLoading = false;
 
     },
 
-    isUserLoading : function () {
+    isUserLoading: function () {
         return this.isLoading;
     }
 
