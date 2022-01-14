@@ -88,7 +88,9 @@ Ext.define("coon.user.app.PackageController", {
     },
 
     /**
-     * Returns permaNav items, including the name of the currently signed in user
+     * Returns permaNav items, including the name of the currently signed in user.
+     * The permaNav will have an "index" applied to signal the interest for being aligned
+     * at the very right side of the toolbar.
      *
      * @return {Object}
      *
@@ -108,14 +110,18 @@ Ext.define("coon.user.app.PackageController", {
         }
 
         return {
-            permaNav: [{
-                xtype: "tbtext",
-                text: user.get("username")
-            }, {
-                xtype: "cn_user-toolbaruserimageitem"
-            }]
+            permaNav: {
+                index: 1000,
+                items: [{
+                    xtype: "tbtext",
+                    text: user.get("username")
+                }, {
+                    xtype: "cn_user-toolbaruserimageitem"
+                }]
+            }
         };
     },
+
 
     /**
      * Method to call when a user is loaded and available.

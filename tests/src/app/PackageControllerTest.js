@@ -92,10 +92,11 @@ StartTest((t) => {
             t.expect(obj).not.toEqual({});
 
             t.expect(obj.permaNav).toBeDefined();
-            t.expect(obj.permaNav.length).toBe(2);
-            t.expect(obj.permaNav[0].text).toBe(
+            t.expect(obj.permaNav.index).toBe(1000);
+            t.expect(obj.permaNav.items.length).toBe(2);
+            t.expect(obj.permaNav.items[0].text).toBe(
                 coon.user.Manager.getUser().get("username"));
-            t.expect(obj.permaNav[1].xtype).toBe(
+            t.expect(obj.permaNav.items[1].xtype).toBe(
                 "cn_user-toolbaruserimageitem");
 
         });
