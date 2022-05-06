@@ -1,7 +1,7 @@
 /**
  * coon.js
  * extjs-app-user
- * Copyright (C) 2017-2021 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
+ * Copyright (C) 2017-2022 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,12 +23,11 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-StartTest((t) => {
+StartTest(t => {
 
-    var img;
+    let img;
 
-
-    t.afterEach(function () {
+    t.afterEach(() => {
         if (!img) {
             return;
         }
@@ -37,35 +36,14 @@ StartTest((t) => {
     });
 
 
-    t.it("Should create and test the UserImageItem", (t) => {
-
-        let tmpV = Ext.getVersion;
-
-        Ext.getVersion = function () {
-            return {
-                major: 6
-            };
-        };
-
+    t.it("Should create and test the UserImageItem", t => {
 
         img = Ext.create("coon.user.view.toolbar.UserImageItem");
         t.isInstanceOf(img, "coon.comp.Img");
         t.expect(img.alias).toContain("widget.cn_user-toolbaruserimageitem");
+        t.expect(img.autoEl).toBe("div");
+        t.expect(img.getGlyph()).toBeFalsy();
 
-        t.expect(img.getGlyph().fontFamily).toBe("'FontAwesome'");
-
-
-        Ext.getVersion = function () {
-            return {
-                major: 7
-            };
-        };
-
-
-        img = Ext.create("coon.user.view.toolbar.UserImageItem");
-        t.expect(img.getGlyph().fontFamily).toBe("'Font Awesome 5 Free'");
-
-        Ext.getVersion = tmpV;
     });
 
 

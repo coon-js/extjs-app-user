@@ -1,7 +1,7 @@
 /**
  * coon.js
  * extjs-app-user
- * Copyright (C) 2017-2021 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
+ * Copyright (C) 2017-2022 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -25,8 +25,6 @@
 
 /**
  * Implementation of Ext.Img to show a user icon.
- * This class is used by the PackageController of extjs-app-user where it gets
- * added to the permaNav in the postLaunchHook-process.
  */
 Ext.define("coon.user.view.toolbar.UserImageItem", {
 
@@ -36,24 +34,6 @@ Ext.define("coon.user.view.toolbar.UserImageItem", {
 
     cls: "cn_user-toolbaruserimageitem",
 
-
-    /**
-     * @inheritdoc
-     * overriden to adjust Glyph Font Family depending on ExtJS Version.
-     *
-     */
-    constructor: function () {
-
-        const
-            me = this,
-            v = Ext.getVersion().major;
-
-        me.callParent(arguments);
-
-        // ExtJS 7 uses "Font Awesome 5 Free" as the glyph Font Family.
-        me.setGlyph("xf007@'" + (v >= 7 ? "Font Awesome 5 Free" : "FontAwesome") + "'");
-
-    }
-
+    autoEl: "div"
 
 });
