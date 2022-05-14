@@ -1,7 +1,7 @@
 /**
  * coon.js
  * extjs-app-user
- * Copyright (C) 2017-2021 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
+ * Copyright (C) 2017-2022 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,50 +23,56 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-StartTest((t) => {
+StartTest(t => {
 
-    t.it("Should create and show the window", (t) => {
+    t.requireOk("coon.core.Environment", () => {
+        let vendorBase = Ext.create("coon.core.env.VendorBase");
+        coon.core.Environment.setVendorBase(vendorBase);
+        coon.core.Environment.getPathForResource = () => ".";
 
-        var window = Ext.create("coon.user.view.authentication.AuthWindow");
 
-        t.expect(window instanceof coon.comp.window.LockingWindow).toBeTruthy();
+        t.it("Should create and show the window", t => {
 
-        t.expect(
-            window.down("cn_user-authform")
+            var window = Ext.create("coon.user.view.authentication.AuthWindow");
+
+            t.expect(window instanceof coon.comp.window.LockingWindow).toBeTruthy();
+
+            t.expect(
+                window.down("cn_user-authform")
                 instanceof coon.user.view.authentication.AuthForm
-        ).toBeTruthy();
+            ).toBeTruthy();
 
-        if (Ext.isModern) {
-            t.expect(window.getDefaultFocus()).toBe("cn_user-authform");
-        } else {
-            t.expect(window.defaultFocus).toBe("cn_user-authform");
-        }
+            if (Ext.isModern) {
+                t.expect(window.getDefaultFocus()).toBe("cn_user-authform");
+            } else {
+                t.expect(window.defaultFocus).toBe("cn_user-authform");
+            }
 
-        window.close();
+            window.close();
 
-    });
-
-    t.it("Relay event cn_user-authrequest should work properly", (t) => {
-
-        var window    = Ext.create("coon.user.view.authentication.AuthWindow"),
-            form      = window.down("cn_user-authform"),
-            evtForm, evtOptions,
-            params =  {foo: "bar"};
-
-        window.on("cn_user-authrequest", function (form, options) {
-            evtForm    = form;
-            evtOptions = options;
         });
 
-        t.expect(evtForm).toBeUndefined();
-        t.expect(evtOptions).toBeUndefined();
+        t.it("Relay event cn_user-authrequest should work properly", t => {
 
-        form.fireEvent("cn_user-authrequest", form, params);
+            var window    = Ext.create("coon.user.view.authentication.AuthWindow"),
+                form      = window.down("cn_user-authform"),
+                evtForm, evtOptions,
+                params =  {foo: "bar"};
 
-        t.expect(evtForm).toBe(form);
-        t.expect(evtOptions).toEqual(params);
+            window.on("cn_user-authrequest", function (form, options) {
+                evtForm    = form;
+                evtOptions = options;
+            });
 
-        window.close();
-    });
+            t.expect(evtForm).toBeUndefined();
+            t.expect(evtOptions).toBeUndefined();
 
-});
+            form.fireEvent("cn_user-authrequest", form, params);
+
+            t.expect(evtForm).toBe(form);
+            t.expect(evtOptions).toEqual(params);
+
+            window.close();
+        });
+
+    });});

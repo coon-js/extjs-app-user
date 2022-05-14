@@ -1,7 +1,7 @@
 /**
  * coon.js
  * extjs-app-user
- * Copyright (C) 2017-2021 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
+ * Copyright (C) 2017-2022 Thorsten Suckow-Homberg https://github.com/coon-js/extjs-app-user
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -46,6 +46,9 @@ export default {
         "coon.core.data": "../node_modules/@coon-js/extjs-lib-core/src/data",
         "coon.comp.form": "../node_modules/@coon-js/extjs-lib-comp/classic/src/form",
         "coon.core.app": "../node_modules/@coon-js/extjs-lib-core/src/app",
+        "coon.core.Environment": "../node_modules/@coon-js/extjs-lib-core/src/Environment.js",
+        "coon.core.env": "../node_modules/@coon-js/extjs-lib-core/src/env",
+        "coon.core.exception": "../node_modules/@coon-js/extjs-lib-core/src/exception",
 
         modern: {
             "coon.comp.Img": "../node_modules/@coon-js/extjs-lib-comp/modern/src/Img.js",

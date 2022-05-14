@@ -1,12 +1,12 @@
 # @coon-js/extjs-app-user ![MIT](https://img.shields.io/npm/l/@coon-js/extjs-app-user) [![npm version](https://badge.fury.io/js/@coon-js%2Fextjs-app-user.svg)](https://badge.fury.io/js/@coon-js%2Fextjs-app-user)
 
 
-This NPM package for Sencha ExtJS applications package provides functionality for managing user authentication, defining
+This NPM package for Sencha Ext JS applications package provides functionality for managing user authentication, defining
 `pre`- and `postLaunchHooks` for an [extjs-lib-comp](https://github.com/coon-js/extjs-lib-comp) application (`coon.comp.app.Application`) as well as required views.
 
 ## Installation
 ```bash
-$ npm install --save-dev @coon-js/extjs-app-user
+$ npm i --save-dev @coon-js/extjs-app-user
 ```
 If you want to develop with `extjs-app-user`, run the `build:dev`-script afterwards:
 ```bash
@@ -20,9 +20,9 @@ $ npm test
 
 For using the package as an external dependency in an application, use
 ```bash
-$ npm install --save-prod @coon-js/extjs-app-user
+$ npm i @coon-js/extjs-app-user
 ```
-In your `app.json`, add this package as a requirement, and make sure your ExtJS `workspace.json`
+In your `app.json`, add this package as a requirement, and make sure your Ext JS `workspace.json`
 is properly configured to look up local repositories in the `node_modules`-directory.
 
 Example (`workspace.json`) :
@@ -49,4 +49,4 @@ The following naming conventions apply:
 Class `coon.user.view.authentication.AuthWindow` has the alias `widget.cn_user-authwindow`
 
 ## Tests
-Tests are written with [Siesta](https://bryntum.com/siesta)
+Tests are written with [Siesta](https://bryntum.com/siesta). Documentation can be found [here](./tests/README.md).
